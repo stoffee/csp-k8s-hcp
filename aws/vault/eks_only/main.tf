@@ -10,6 +10,7 @@ module "hcp-eks" {
   hcp_vault_cluster_id = var.hcp_vault_cluster_id
   deploy_eks_cluster   = var.deploy_eks_cluster
   vpc_region           = var.vpc_region
-  eks_instance_types   = ["t2.small"]
-  eks_cluster_version  = "1.22"
+  eks_instance_types   = ["t3a.medium"]
+  #eks_instance_types   = ["t2.small"]
+  eks_cluster_version  = "1.25"
 }

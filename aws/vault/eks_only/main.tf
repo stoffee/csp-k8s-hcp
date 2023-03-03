@@ -1,6 +1,6 @@
 module "hcp-eks" {
   source  = "stoffee/vault-eks/hcp"
-  version = "~> 0.0.12"
+  version = "~> 0.0.13"
   #source               = "../../../../terraform-hcp-vault-eks/"
   cluster_id           = var.cluster_id
   deploy_hvn           = var.deploy_hvn

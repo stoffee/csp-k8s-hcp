@@ -23,6 +23,11 @@ variable "eks_instance_types" {
   default = ["t2.small"]
 }
 
+variable "eks_cluster_version" {
+  description = "The version of your EKS cluster"
+  default     = "1.25"
+}
+
 variable "deploy_hvn" {
   type        = string
   description = "Choose to deploy HCP HVP or use an existing one"

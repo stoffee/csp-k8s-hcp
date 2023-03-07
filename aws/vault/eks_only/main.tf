@@ -12,6 +12,6 @@ module "hcp-eks" {
   vpc_region           = var.vpc_region
   #eks_instance_types   = ["t3a.medium"]
   eks_instance_types   = ["t2.small"]
-  eks_cluster_version  = "1.24"
+  eks_cluster_version  = "1.25"
 }
 

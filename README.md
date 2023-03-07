@@ -1,6 +1,6 @@
 ## HCP Multi-Cloud Kubernetes
 
-<a target="_blank" href="https://github.com/stoffee/terraform-hcp-vault-eks">This repo</a> 
+<a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/">This repo</a> 
 automates (eliminates much of) the <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault">manual effort</a> 
 to create a <strong>Highly Available (HA) Vault service</strong> in an AWS EKS (Elastic Kubernetes Service) cluster managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
 

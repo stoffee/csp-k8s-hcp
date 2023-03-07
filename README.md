@@ -2,11 +2,21 @@
 
 <a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/">This repo</a> 
 automates (eliminates much of) the <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault">manual effort</a> 
-to create a <strong>Highly Available (HA) Vault service</strong> in an AWS EKS (Elastic Kubernetes Service) cluster managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
+to create a <strong>Highly Available (HA) Vault & Consul service</strong> in a Kubernetes cluster managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
+
+This repo does not contain all Terraform HCL needed because it leverages several <a target="_blank" href="https://registry.terraform.io/browse/modules">modules in registry.terraform.io</a>, such as:
+   * EKS (Elastic Kubernetes Service) in AWS
+   * AKS (Azure Kubernetes Service)
+   * GKE (Google Kubernetes Engine)
+   <br /><br />
+
+Each module was coded with <strong>variables</strong> to allow for customization.
+
+Code in this repo include customizations added to address vulnerabilities which are identified by tfsec, Trivey, Checkov, and other static scans of Terraform HCL.
+
+Described below are the manual and automated processes:
 
 <a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1677345946/instant-hcp-vault-1772x764_kcj6u6.jpg"><img alt="instant-hcp-vault-1772x764.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1677345946/instant-hcp-vault-1772x764_kcj6u6.jpg"></a>
-
-Automation invoked through this repo references modules in the <a target="_blank" href="https://registry.terraform.io/">https://registry.terraform.io</a>. Each module was coded with variables to allow for customization. 
 
 TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault.
 

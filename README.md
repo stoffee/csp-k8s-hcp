@@ -1,22 +1,50 @@
 ## HCP Multi-Cloud Kubernetes
 
-<a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/">This repo</a> 
-automates (eliminates much of) the <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault">manual effort</a> 
-to create a <strong>Highly Available (HA) Vault & Consul service</strong> in a Kubernetes cluster managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
-
-This repo does not contain all Terraform HCL needed because it leverages several <a target="_blank" href="https://registry.terraform.io/browse/modules">modules in registry.terraform.io</a>, such as:
+<a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/">This repo</a> was designed with automation and defaults that minimize the <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault">manual effort</a> to create <strong>Highly Available (HA) services</strong> in Kubernetes cluster within several clouds:
+ 
    * EKS (Elastic Kubernetes Service) in AWS
    * AKS (Azure Kubernetes Service)
    * GKE (Google Kubernetes Engine)
    <br /><br />
 
+A folder is provided in this repo was created for each cloud.
+
+Within a cloud folder is a "dev" (development) and "prd" (for productions) folder.
+
+Within each of those folders is an <tt>examples</tt> folder for each configuration you want created.
+As is the industry custom for Terraform, rename the sample to <tt>sample.auto.tfvars</tt> where you customize values to be used for your desired set of resources.
+
+## Data flow diagram
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1678879269/instant-hcp-vault-1774x763_bvvwnk.jpg"><img alt="instant-hcp-vault-1774x763.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1678879269/instant-hcp-vault-1774x763_bvvwnk.jpg"></a>
+
+## Manual steps:
+1. Obtain a cloud account with sufficient permissions, and use it to create networking resources and other pre-requisites.
+2. Create a free TFC account to hold your Terraform state files safely in HashiCorp's cloud.
+3. Create a HCP account to segregate workspaces and run workflow tasks such as Synk. (HCP uses a HVN).
+
+4. Run a script to install programs and GitHub repos in your macOS laptop used to build environments. Installers for VSCode and other programs are obtained from Homebrew and other Registries. 
+5. Configure values for variables in a auto.tfvars file for an example.
+6. Run terraform plan and apply in a CI workflow to automatically include verification of Terraform code (using Sentinel or OPA rules) and generation of diagrams.
+7. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
+8. View alerts generated from logs sent to a SIEM (such as Splunk or Datadog).
+
+9. Install on application developer laptops a Vault client and other utilities
+10. Populate user information and credentials in your IdP (Identity Provider).
+11. Run tests of connection to the application UI created.
+12. Include functional, performance, and capacity tests in a testing workflow.
+13. Test by end-user clients.
+<br /><br />
+
+This repo does not contain all the code needed to install application services (such as HashiCorp Vault, Consul, sample apps, plus Kubernetes add-ons) because it references Terraform HCL defined as <a target="_blank" href="https://registry.terraform.io/browse/modules">modules in registry.terraform.io</a> created by various trusted authors.
+
 Each module was coded with <strong>variables</strong> to allow for customization.
 
+
+This
+
+    managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
+
 Code in this repo include customizations added to address vulnerabilities which are identified by tfsec, Trivey, Checkov, and other static scans of Terraform HCL.
-
-Described below are the manual and automated processes:
-
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1677345946/instant-hcp-vault-1772x764_kcj6u6.jpg"><img alt="instant-hcp-vault-1772x764.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1677345946/instant-hcp-vault-1772x764_kcj6u6.jpg"></a>
 
 TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault.
 

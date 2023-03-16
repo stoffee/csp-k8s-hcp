@@ -13,21 +13,21 @@
 
 Use <strong>pre-defined</strong> Terraform <strong>modules</strong> which have been reviewed by several experienced professionals to contain secure defaults and mechanisms for <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/operations/production-hardening">security hardening</a> that include:
 
-    * RBAC settings by <strong>persona</strong> for Least-privilege permissions (separate accounts to read but not delete)
+   * RBAC settings by <strong>persona</strong> for Least-privilege permissions (separate accounts to read but not delete)
 
-    * Verification and automated implementation of the latest TLS certificate version and Customer-provided keys
-    * End-to-End encryption to protect communications, logs, and all data at rest
-    * Automatic dropping of invalid headers
-    * Logging enabled for audit and forwarding
-    * Automatic movement of logs to a SIEM (such as Splunk) for analytics and alerting
-    * Automatic purging of logs to conserve disk space usage
-    * Purge protection (waiting periods) on KMS keys and Volumes
+   * Verification and automated implementation of the latest TLS certificate version and Customer-provided keys
+   * End-to-End encryption to protect communications, logs, and all data at rest
+   * Automatic dropping of invalid headers
+   * Logging enabled for audit and forwarding
+   * Automatic movement of logs to a SIEM (such as Splunk) for analytics and alerting
+   * Automatic purging of logs to conserve disk space usage
+   * Purge protection (waiting periods) on KMS keys and Volumes
 
-    * Enabled automatic secrets rotation, auto-repair, auto-upgrade
-    * Disabled operating system swap to prevent the from paging sensitive data to disk. This is especially important when using the integrated storage backend.
-    * Disable operating system core dumps which may contain sensitive information
-    * etc.
-    <br /><br />
+   * Enabled automatic secrets rotation, auto-repair, auto-upgrade
+   * Disabled operating system swap to prevent the from paging sensitive data to disk. This is especially important when using the integrated storage backend.
+   * Disable operating system core dumps which may contain sensitive information
+   * etc.
+   <br /><br />
 
 Let's start by looking at the structure of the repo's folders and files.
 
@@ -37,7 +37,7 @@ Let's start by looking at the structure of the repo's folders and files.
 
 At the root of the repo, a folder is created for each cloud (AWS, Azure, GCP).
 
-Within each cloud folder is a folder for each <strong>environment</strong: "dev" (development) and "prd" (for production) use.
+Within each cloud folder is a folder for each <strong>environment</strong>: "dev" (development) and "prd" (for production) use.
 
 Within each of environment folders is an <tt>examples</tt> folder for each alternative configuration you want created.
 
@@ -45,14 +45,14 @@ As is the industry custom for Terraform, a sample file is provided so you can re
 
 Use of "feature flags" to optionally include Kubernetes add-ons needed for production-quality use:
 
-    * DNS
-    * Verification of endpoints
-    * Observability Extraction (Prometheus)
-    * Analytics (dashboarding) of metrics (Grafana)
-    * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
-    * Troubleshooting
-    * etc.
-    <br /><br />
+   * DNS
+   * Verification of endpoints
+   * Observability Extraction (Prometheus)
+   * Analytics (dashboarding) of metrics (Grafana)
+   * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
+   * Troubleshooting
+   * etc.
+   <br /><br />
 
 <a name="DataFlowDiagram"></a>
 

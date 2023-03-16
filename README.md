@@ -7,6 +7,9 @@
    * GKE (Google Kubernetes Engine)
    <br /><br />
 
+
+## Repo folders and files
+
 A folder is provided in this repo was created for each cloud.
 
 Within a cloud folder is a "dev" (development) and "prd" (for productions) folder.
@@ -23,41 +26,87 @@ As is the industry custom for Terraform, rename the sample to <tt>sample.auto.tf
 3. <a href="#SetHCPEnv">Set HCP environment variables</a>: Create a HCP account to segregate workspaces and run workflow tasks such as Synk. (HCP uses a HVN).
 
 4. <a href="#Install">Run a script to install</a> (on a macOS laptop) programs and GitHub repos in your macOS laptop used to build environments. Installers for VSCode and other programs are obtained from Homebrew and other Registries. 
+
+   NOTE: This repo does not contain all the code needed to install    application services (such as HashiCorp Vault, Consul, sample apps, plus Kubernetes add-ons) because it references Terraform HCL defined as <a target="_blank" href="https://registry.terraform.io/browse/modules">modules in registry.terraform.io</a> created by various trusted authors.
+
+   Each module was coded with <strong>variables</strong> to allow for customization.
+
 5. <a href="#Edit_tfvars">Edit options in sample.auto.tfvars</a> to configure values for variables used in Terraform runs.
-6. Run <tt>terraform plan</tt> and apply in a CI workflow to automatically include <a href="#ScanTF">verification of Terraform code</a> (using Sentinel or OPA rules) and generation of diagrams.
+
+6. Run <tt>terraform plan</tt> and apply in a CI workflow to automatically include <a href="#ScanTF">verification of Terraform code</a> (using Sentinel or OPA rules) and generate diagrams.
+
+   Code in this repo include customizations added to address  vulnerabilities which are identified by tfsec, Trivey, Checkov, and other static scans of Terraform HCL.
+
+   * <a href="#SelectExample">Select Example Deploy</a>
+   * <a href="#ProductionDeploy">Production Deploy?</a><br />
+   <br /><br />
+  
 7. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 8. View alerts generated from logs sent to a SIEM (such as Splunk or Datadog).
 
 9. Install on application developer laptops a Vault client and other utilities
 10. Populate user information and credentials in your IdP (Identity Provider).
 11. Run tests of connection to the application UI created.
+
+    TODO: Also included is a sample application (HashiCups) to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
+
 12. Include functional, performance, and capacity tests in a testing workflow.
+
+   TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault.
+
 13. Test by end-user clients.
 <br /><br />
 
-This repo does not contain all the code needed to install application services (such as HashiCorp Vault, Consul, sample apps, plus Kubernetes add-ons) because it references Terraform HCL defined as <a target="_blank" href="https://registry.terraform.io/browse/modules">modules in registry.terraform.io</a> created by various trusted authors.
-
-Each module was coded with <strong>variables</strong> to allow for customization.
-
--- the quickest and most secure and repeatable way to do so.
-
-Code in this repo include customizations added to address vulnerabilities which are identified by tfsec, Trivey, Checkov, and other static scans of Terraform HCL.
-
-TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault.
-
-TODO: Also included is a sample application (HashiCups) to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
-
 <hr />
+
+<a name="Why"></a>
+### Why this (Terraform in HCP)? #
+
+There are several ways to create a HashiCorp Vault instance.
+
+The approach as described in this tutorial has the following advantages:
+
+1.  Solve the "Secret Zero" problem: use using HashiCorp's MFA (Multi-Factor Authentication) embedded within HCP (HashiCorp Cloud Platform) secure infrastructure to authenticate Administrators, who have elevated privileges over all other users.
+
+2.  Use <strong>pre-defined</strong> Terraform <strong>modules</strong> which have been reviewed by several experienced professionals to contain secure defaults and mechanisms for <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/operations/production-hardening">security hardening</a> that include:
+
+    * RBAC settings by <strong>persona</strong> for Least-privilege permissions (separate accounts to read but not delete)
+
+    * Verification and automated implementation of the latest TLS certificate version and Customer-provided keys
+    * End-to-End encryption to protect communications, logs, and all data at rest
+    * Automatic dropping of invalid headers
+    * Logging enabled for audit and forwarding
+    * Automatic movement of logs to a SIEM (such as Splunk) for analytics and alerting
+    * Automatic purging of logs to conserve disk space usage
+    * Purge protection (waiting periods) on KMS keys and Volumes
+
+    * Enabled automatic secrets rotation, auto-repair, auto-upgrade
+    * Disabled operating system swap to prevent the from paging sensitive data to disk. This is especially important when using the integrated storage backend.
+    * Disable operating system core dumps which may contain sensitive information
+    * etc.
+    <br /><br />
+
+3.  Use of Infrastructure-as-Code enables quicker response to security changes identified over time, such as for EC2 IMDSv2.
+
+4.  Ease of use: Use of the HCP GUI means no complicated commands to remember, especially to perform emergency "break glass" procedures to stop Vault operation in case of an intrusion. 
+
+5.  Use of "feature flags" to optionally include Kubernetes add-ons needed for production-quality use:
+
+    * DNS
+    * Verification of endpoints
+    * Observability Extraction (Prometheus)
+    * Analytics (dashboarding) of metrics (Grafana)
+    * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
+    * Troubleshooting
+    * etc.
+    <br /><br />
+
+6.  TODO: Use of a CI/CD pipeline to version every change, automated scanning of Terraform for vulnerabilities (using TFSec and other utilities), and confirmation that policies-as-code are not violated.
+
 
 ## Deployment
 
-A. <a href="#Why">Why this (Terraform in HCP)</a><br />
-B. <a href="#Install">Install utility programs</a><br />
-C. <a href="#SetHCPEnv">Set HCP environment variables</a><br />
-D. <a href="#SelectExample">Select Example Deploy</a><br />
-E. <a href="#ProductionDeploy">Production Deploy?</a><br />
 
-F. <a href="#Edit_tfvars">Edit options in sample.auto.tfvars</a><br />
 G. <a href="#SetAWSEnv">Set AWS environment variables</a><br />
 H. <a href="#ScanTF">Scan Terraform for vulnerabilities</a><br />
 I. &nbsp; <a href="#DeployTF">Run Terraform to Deploy</a><br />

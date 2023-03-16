@@ -20,11 +20,11 @@ As is the industry custom for Terraform, rename the sample to <tt>sample.auto.tf
 ## Manual steps:
 1. Obtain a cloud account with sufficient permissions, and use it to create networking resources and other pre-requisites.
 2. Create a free TFC account to hold your Terraform state files safely in HashiCorp's cloud.
-3. Create a HCP account to segregate workspaces and run workflow tasks such as Synk. (HCP uses a HVN).
+3. <a href="#SetHCPEnv">Set HCP environment variables</a>: Create a HCP account to segregate workspaces and run workflow tasks such as Synk. (HCP uses a HVN).
 
-4. Run a script to install programs and GitHub repos in your macOS laptop used to build environments. Installers for VSCode and other programs are obtained from Homebrew and other Registries. 
-5. Configure values for variables in a auto.tfvars file for an example.
-6. Run terraform plan and apply in a CI workflow to automatically include verification of Terraform code (using Sentinel or OPA rules) and generation of diagrams.
+4. <a href="#Install">Run a script to install</a> (on a macOS laptop) programs and GitHub repos in your macOS laptop used to build environments. Installers for VSCode and other programs are obtained from Homebrew and other Registries. 
+5. <a href="#Edit_tfvars">Edit options in sample.auto.tfvars</a> to configure values for variables used in Terraform runs.
+6. Run <tt>terraform plan</tt> and apply in a CI workflow to automatically include <a href="#ScanTF">verification of Terraform code</a> (using Sentinel or OPA rules) and generation of diagrams.
 7. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 8. View alerts generated from logs sent to a SIEM (such as Splunk or Datadog).
 
@@ -39,10 +39,7 @@ This repo does not contain all the code needed to install application services (
 
 Each module was coded with <strong>variables</strong> to allow for customization.
 
-
-This
-
-    managed by the HCP (HashiCorp Cloud Platform) -- the quickest and most secure and repeatable way to do so.
+-- the quickest and most secure and repeatable way to do so.
 
 Code in this repo include customizations added to address vulnerabilities which are identified by tfsec, Trivey, Checkov, and other static scans of Terraform HCL.
 
@@ -141,12 +138,12 @@ The approach as described in this tutorial has the following advantages:
     brew install  git  jq  awscli  tfsec  vault  kubectl
     </strong></pre>
 
-    NOTE: HashiCorp Enterprise users instead use the Vault enterprise (vault-ent) program.
+    NOTE: HashiCorp Enterprise users instead use the Vault enterprise (<tt>vault-ent</tt>) program.
 
     
     <a name="SetHCPEnv"></a>
 
-    ### &#9744; Set HCP environment variables
+    ### &#9744; Set cloud environment variables
 
     Below are steps to obtain credentials used to set up HCP within AWS:
     ```bash
@@ -158,6 +155,7 @@ The approach as described in this tutorial has the following advantages:
     Most enterprises allocate AWS dynamically for a brief time (such as HashiCorp employees using "Bootcamp"). So the above are defined on a Terminal session for one-time use instead of being stored (long term, statically) in a <tt>$HOME/.zshrc</tt> or <tt>$HOME/.bash_profile</tt> file run automatically when a Terminal window is created.
 
     <a name="SignInHCP"></a>
+    ### &#9744; Set HCP environment variables    
 2.  Be at the browser window which you want a new tab added to contain the URL in the next step:
 3.  Click this URL to open the HCP portal:
     
@@ -166,9 +164,9 @@ The approach as described in this tutorial has the following advantages:
 4.  Click "Sign in" or, if you haven't already, "Create an account" (for an "org" to work with) to reach the Dashboard for your organization listed at the bottom-left.
 
 5.  PROTIP: To quickly reach the URL specific to your org, save it to your bookmarks in your browser.
-6.  PROTIP: HCP has a 7-minute interaction timeout. So many users auto-populate the browser form using 1Password, which stores and retrieves credentials locally.
+6.  REMEMBER: HCP has a 7-minute interaction timeout. So many users auto-populate the browser form using 1Password, which stores and retrieves credentials locally.
    
-7.  Click "Access control (IAM)" on the left menu item under your org.
+7.  Click "Access control (IAM)" on the left menu item under your org. name.
 8.  Click "Service principals" (which act like users on behalf of a service).
 9.  Click the blue "Create Service principal".
 10. Specify a Name (for example, JohnDoe-23-12-31) for a Contributor.
@@ -196,28 +194,28 @@ The approach as described in this tutorial has the following advantages:
  
 18. Obtain a copy of the repository onto your laptop:
     ```bash
-    git clone git@github.com:stoffee/terraform-hcp-vault-eks.git
-    cd terraform-hcp-vault-eks
+    git clone git@github.com:stoffee/csp-k8s-hcp.git
+    cd csp-k8s-hcp
     ```
 19. Since the <tt>main</tt> branch of this repo is under active change and thus may be unstable, copy to your Clipboard the last stable release of this repo to use at:
 
-    <a target="_blank" href="https://github.com/stoffee/terraform-hcp-vault-eks/releases">
-    https://github.com/stoffee/terraform-hcp-vault-eks/releases</a>
+    <a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/releases">
+    https://github.com/stoffee/csp-k8s-hcp/releases</a>
 
 20. Identify release tag (such as "v0.0.6").
 21. Click "Code" on the menu bar, then the green "Code" to obtain the SSH clone name:
 22. In a Terminal, navigate to a folder where you will be cloning the repo
 23. Clone the repo and checkout the release/version in the previous step:
     ```bash
-    git clone git@github.com:stoffee/terraform-hcp-vault-eks.git
-    cd terraform-hcp-vault-eks
+    git clone git@github.com:stoffee/csp-k8s-hcp.git
+    cd csp-k8s-hcp
     git checkout v0.0.6
     ```
     Alternately, you can Fork on the GUI, then clone using your own instead of the "stoffee" account.
 
     Notice that the repo is structured according to the HashiCorp recommended structure of folders and files at<br />https://developer.hashicorp.com/terraform/language/modules/develop/structure
 
-24. Navigate into one of the <a target="_blank" href=https://github.com/stoffee/terraform-hcp-vault-eks/tree/primary/examples>example</a> folder of deployments:
+24. Navigate into one of the <a target="_blank" href=https://github.com/stoffee/csp-k8s-hcp/tree/primary/examples>example</a> folder of deployments:
     ```bash
     cd examples
     cd full-deploy
@@ -255,7 +253,7 @@ The approach as described in this tutorial has the following advantages:
     ```bash
     cp sample.auto.tfvars_example  sample.auto.tfvars
     ```
-    NOTE: Your file <tt>sample.auto.tfvars</tt> is specified in the <a target="_blank" href="https://github.com/stoffee/terraform-hcp-vault-eks/blob/main/.gitignore">this repo's .gitignore</a> file so it doesn't get uploaded into GitHub.
+    NOTE: Your file <tt>sample.auto.tfvars</tt> is specified in the <a target="_blank" href="https://github.com/stoffee/csp-k8s-hcp/blob/main/.gitignore">this repo's .gitignore</a> file so it doesn't get uploaded into GitHub.
 
 26. Use a text editor program (such as VSCode) to customize the <tt>sample.auto.tfvars</tt> file. For example:
 
@@ -358,7 +356,7 @@ The approach as described in this tutorial has the following advantages:
     eks_cluster_platform_version = "eks.15"
     eks_cluster_status = "ACTIVE"
     kubeconfig_filename = &LT;&LT;EOT
-    /Users/wilsonmar/githubs/terraform-hcp-vault-eks/examples/full-deploy/apiVersion: v1
+    /Users/wilsonmar/githubs/csp-k8s-hcp/examples/full-deploy/apiVersion: v1
     kind: ConfigMap
     metadata:
     name: aws-auth

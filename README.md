@@ -118,7 +118,7 @@ This section serves as a table of contents (summary).
 
 12. Create and run <strong>workflows</strong>, which include functional, performance, and capacity tests (perhaps run overnight) to emulate activity from end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
 
-   TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault, such as <a href="#GitHubOIDC">GitHub OIDC</a> protocol.
+    TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault, such as <a href="#GitHubOIDC">GitHub OIDC</a> protocol.
 
     TODO: Use of a CI/CD pipeline to version every change, automated scanning of Terraform for vulnerabilities (using TFSec and other utilities), and confirmation that policies-as-code are not violated.
 

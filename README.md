@@ -495,14 +495,14 @@ The approach as described in this tutorial has the following advantages:
     
     CAUTION: Please resist changing resources using the AWS Management Console GUI, which breaks version controls and renders obsolete the state files created when the resources were provisioned.
     
-32. The list of resources created can be obtained:
+32. Obtain a list of resources created:
     ```bash
     terraform state list
     ```
 
     <a name="AccessVaultURL"></a>
 
-    ### &#9744; Obtain Vault GUI URL:
+    ### &#9744; Obtain Vault GUI URL
 
 33. Be at the browser window you will add a new tab for the Vault UI.
 34. Switch to your Terminal to open a browser window presenting the HCP Vault cluster URL obtained (on a Mac) using this CLI command:
@@ -524,7 +524,7 @@ The approach as described in this tutorial has the following advantages:
 
     <a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1676722172/vault-signin-auth-methods-118x227_n7ozq8.jpg"><img alt="vault-signin-auth-methods-118x227.jpg" width="118" height="227" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1676722172/vault-signin-auth-methods-118x227_n7ozq8.jpg"></a>
 
-35. PROTIP: Optionally, save the URL in your browser for quicker access in the future.
+35. PROTIP: Optionally, save the URL as a Bookmark in your browser for quicker access in the future.
 
 36. Copy the admin Token into your Clipboard for "Sign in to Vault" (on a Mac). 
     ```bash
@@ -543,6 +543,7 @@ The approach as described in this tutorial has the following advantages:
 38. Click in the <strong>Token</strong> field within the "Sign in" form, then paste the token.
 
 39. Click the blue "Sign in" (as Administrator).
+
 
     <a name="VaultMenu"></a>
 

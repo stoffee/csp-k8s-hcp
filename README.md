@@ -43,16 +43,6 @@ Within each of environment folders is an <tt>examples</tt> folder for each alter
 
 As is the industry custom for Terraform, a sample file is provided so you can rename <tt>sample.auto.tfvars</tt> to customize values to be used for your desired set of resources.
 
-Use of "feature flags" to optionally include Kubernetes add-ons needed for production-quality use:
-
-   * DNS
-   * Verification of endpoints
-   * Observability Extraction (Prometheus)
-   * Analytics (dashboarding) of metrics (Grafana)
-   * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
-   * Troubleshooting
-   * etc.
-   <br /><br />
 
 <a name="DataFlowDiagram"></a>
 
@@ -87,7 +77,17 @@ This section serves as a table of contents (summary).
    * <a href="#SelectExample">Select Example Deploy</a>
    * <a href="#ProductionDeploy">Production Deploy?</a><br />
    <br /><br />
-  
+   To make what is created "composable", "feature flags" have been added to optionally include or exclude install of specific Kubernetes add-ons:
+   * DNS
+   * Verification of endpoints
+   * Observability Extraction (Prometheus)
+   * Analytics (dashboarding) of metrics (Grafana)
+   * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
+   * Troubleshooting
+   * etc.
+   <br /><br />
+   Various combinations are tested together.
+
 6. <a href="#DeployTF">Run the terraform program</a> (<tt>terraform plan</tt> and <tt>terraform apply</tt>). A sample automated CI (Continuous Integration) workflow is provided to automatically include <a href="#ScanTF">verification of Terraform code</a>. Several tools scan Terraform HCL code to identify vulnerabilities: tfsec, Trivey, Checkov, Snyk, etc. These use rules defined by vendors. Custom HCP Sentinel or OPA rules can be defined (such as to ensure that tags have been defined in all HCL for accurate project billing).
 
    The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud.

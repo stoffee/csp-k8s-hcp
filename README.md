@@ -13,21 +13,21 @@
 
 Use <strong>pre-defined</strong> Terraform <strong>modules</strong> which have been reviewed by several experienced professionals to contain secure defaults and mechanisms for <a target="_blank" href="https://developer.hashicorp.com/vault/tutorials/operations/production-hardening">security hardening</a> that include:
 
-   * RBAC settings by <strong>persona</strong> for Least-privilege permissions (separate accounts to read but not delete)
+    * RBAC settings by <strong>persona</strong> for Least-privilege permissions (separate accounts to read but not delete)
 
-   * Verification and automated implementation of the latest TLS certificate version and Customer-provided keys
-   * End-to-End encryption to protect communications, logs, and all data at rest
-   * Automatic dropping of invalid headers
-   * Logging enabled for audit and forwarding
-   * Automatic movement of logs to a SIEM (such as Splunk) for analytics and alerting
-   * Automatic purging of logs to conserve disk space usage
-   * Purge protection (waiting periods) on KMS keys and Volumes
+    * Verification and automated implementation of the latest TLS certificate version and Customer-provided keys
+    * End-to-End encryption to protect communications, logs, and all data at rest
+    * Automatic dropping of invalid headers
+    * Logging enabled for audit and forwarding
+    * Automatic movement of logs to a SIEM (such as Splunk) for analytics and alerting
+    * Automatic purging of logs to conserve disk space usage
+    * Purge protection (waiting periods) on KMS keys and Volumes
 
-   * Enabled automatic secrets rotation, auto-repair, auto-upgrade
-   * Disabled operating system swap to prevent the from paging sensitive data to disk. This is especially important when using the integrated storage backend.
-   * Disable operating system core dumps which may contain sensitive information
-   * etc.
-   <br /><br />
+    * Enabled automatic secrets rotation, auto-repair, auto-upgrade
+    * Disabled operating system swap to prevent the from paging sensitive data to disk. This is especially important when using the integrated storage backend.
+    * Disable operating system core dumps which may contain sensitive information
+    * etc.
+    <br /><br />
 
 Let's start by looking at the structure of the repo's folders and files.
 
@@ -37,7 +37,7 @@ Let's start by looking at the structure of the repo's folders and files.
 
 At the root of the repo, a folder is created for each cloud (AWS, Azure, GCP).
 
-Within each cloud folder is a folder for each <strong>environment</strong>: "dev" (development) and "prd" (for production) use.
+Within each cloud folder is a folder for each <strong>environment</strong: "dev" (development) and "prd" (for production) use.
 
 Within each of environment folders is an <tt>examples</tt> folder for each alternative configuration you want created.
 
@@ -45,14 +45,14 @@ As is the industry custom for Terraform, a sample file is provided so you can re
 
 Use of "feature flags" to optionally include Kubernetes add-ons needed for production-quality use:
 
-   * DNS
-   * Verification of endpoints
-   * Observability Extraction (Prometheus)
-   * Analytics (dashboarding) of metrics (Grafana)
-   * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
-   * Troubleshooting
-   * etc.
-   <br /><br />
+    * DNS
+    * Verification of endpoints
+    * Observability Extraction (Prometheus)
+    * Analytics (dashboarding) of metrics (Grafana)
+    * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for your workloads and remove them when no longer needed
+    * Troubleshooting
+    * etc.
+    <br /><br />
 
 <a name="DataFlowDiagram"></a>
 
@@ -60,7 +60,7 @@ Use of "feature flags" to optionally include Kubernetes add-ons needed for produ
 
 Here are the major components and how they interact with each other.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1678879269/instant-hcp-vault-1774x763_bvvwnk.jpg"><img alt="instant-hcp-vault-1774x763.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1678879269/instant-hcp-vault-1774x763_bvvwnk.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1678979975/instant-hcp-vault-978x418_akydv9.jpg"><img alt="instant-hcp-vault-978x418.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1678979975/instant-hcp-vault-978x418_akydv9.jpg"></a>
 
 Numbers in bubbles on the diagram mark where manual actions are performed.
 
@@ -96,39 +96,37 @@ This section serves as a table of contents (summary).
    
 8. <a href="#AccessVaultURL">Obtain Vault GUI URL</a> to specify variables used to install on application developer laptops a Vault client and other utilities. For example, one <strong>workflow</strong> can install and run a local Jupyter server program with Docker for use in demonstrating CLI commands exercising Vault.
 
+   Access Vault instance several ways to test connection to the 
+   * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
+   * <a href="#AccessVaultCLI">Access Vault using CLI</a>
+   * <a href="#AccessVaultAPI">Access Vault API programming</a>
+   <br /><br />
+
+   <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
+
+   <a href="#VaultTools">Use Vault Tools</a>.
+
+   TODO: Also included is a sample application (HashiCups) to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
+   
 9. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 
    If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
 
-10. Access Vault instance several ways to test connection to the 
-    * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
-    * <a href="#AccessVaultCLI">Access Vault using CLI</a>
-    * <a href="#AccessVaultAPI">Access Vault API programming</a>
-    <br /><br />
-
-    <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
-
-    <a href="#VaultTools">Use Vault Tools</a>.
-
-    TODO: Also included is a sample application (HashiCups) to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
+10. Ensure there is adequate backup capability by testing restore procedures.
 
 11. <a href="#CreateUsers">Create User Accounts</a>, <a href="#ConfigPolicies">Configure Policies</a>, and <a href="#EditPolicies">Edit Policies</a> to populate enough users with credentials in your IdP (Identity Provider) to run load tests. 
 
-12. Include functional, performance, and capacity tests in a testing workflow.
+12. Create and run <strong>workflows</strong>, which include functional, performance, and capacity tests (perhaps run overnight) to emulate activity from end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
 
    TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault, such as <a href="#GitHubOIDC">GitHub OIDC</a> protocol.
 
-13. Run tests emulating end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
-
-14. Verify configuration on every change
-
     TODO: Use of a CI/CD pipeline to version every change, automated scanning of Terraform for vulnerabilities (using TFSec and other utilities), and confirmation that policies-as-code are not violated.
 
-    Use of Infrastructure-as-Code enables quicker response to security changes identified over time, such as for EC2 IMDSv2.
+13. Verify configuration on every change. This is important to really determine whether the whole system works both before and after <a href="#Upgrade">changing/upgrading any component</a> (Versions of Kubernetes, operating system, Vault, etc.). The Enterprise version of Terraform, Vault, and Consul provide for automation of upgrades.
 
-    <a href="#Upgrade">Manage Kubernetes</a>.
-    
-    <a href="#DestroyVault">Destroy Vault instance</a>.
+    Again, use of Infrastructure-as-Code enables quicker response to security changes identified over time, such as for EC2 IMDSv2.    
+
+14. Destroy instances of <a href="#DestroyVault">Vault</a>, Consul to having idle resources consuming money for no good reason.
 
 <br /><br />
 

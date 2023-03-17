@@ -75,11 +75,11 @@ This section serves as a table of contents (summary).
 5. <a href="#Edit_tfvars">Edit options in sample.auto.tfvars</a> to configure values for variables used in Terraform runs.
 
    * <a href="#SelectExample">Select Example Deploy</a>
-   * <a href="#ProductionDeploy">Production Deploy?</a><br />
+   * <a href="#ProductionDeploy">Production Deploy</a>
    <br /><br />
    "Feature flags" -- variables with true or false values defining whether a Kubernetes add-on or some feature is optionally included or excluded in a particular install, such as:
 
-   * DNS
+   * VPC, DNS, and other networking "prerequisite" resources
    * Verification of endpoints
    * Observability Extraction (Prometheus)
    * Analytics (dashboarding) of metrics (Grafana)

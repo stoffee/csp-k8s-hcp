@@ -77,7 +77,8 @@ This section serves as a table of contents (summary).
    * <a href="#SelectExample">Select Example Deploy</a>
    * <a href="#ProductionDeploy">Production Deploy?</a><br />
    <br /><br />
-   To make what is created "composable", "feature flags" have been added to optionally include or exclude install of specific Kubernetes add-ons:
+   "Feature flags" -- variables with true or false values defining whether a Kubernetes add-on or some feature is optionally included or excluded in a particular install, such as:
+
    * DNS
    * Verification of endpoints
    * Observability Extraction (Prometheus)
@@ -86,13 +87,19 @@ This section serves as a table of contents (summary).
    * Troubleshooting
    * etc.
    <br /><br />
-   Various combinations are tested together.
+   Various combinations are "composed" and tested together.
 
-6. <a href="#DeployTF">Run the terraform program</a> (<tt>terraform plan</tt> and <tt>terraform apply</tt>). A sample automated CI (Continuous Integration) workflow is provided to automatically include <a href="#ScanTF">verification of Terraform code</a>. Several tools scan Terraform HCL code to identify vulnerabilities: tfsec, Trivey, Checkov, Snyk, etc. These use rules defined by vendors. Custom HCP Sentinel or OPA rules can be defined (such as to ensure that tags have been defined in all HCL for accurate project billing).
+6. Several ways are available to <a href="#DeployTF">run the terraform program</a>. 
+
+   6a. Run <tt>terraform plan</tt> and <tt>terraform apply</tt> commands on a stand-alone laptop to create a state file locally on the laptop.
+
+   6b. Define git hooks to automatically invoke automated CI (Continuous Integration) workflow, which is recommended because this  automatically include <a href="#ScanTF">verification of Terraform code</a>. Several tools scan Terraform HCL code to identify vulnerabilities: tfsec, Trivey, Checkov, Snyk, etc. These use rules defined by vendors. 
 
    The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud.
 
-   A sample application with a UI (such as HashiCups) is used to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
+   6c. Runs can be initiated using the HCP (HarshiCorp Platform) GUI, which enables Custom HCP Sentinel or OPA rules can be defined (such as to ensure that tags have been defined in all HCL for accurate project billing).
+
+   Instantiated can be a sample application with a UI (such as HashiCups) is used to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
 
    Output from runs include the Vault service URL and credential token.
 

@@ -115,7 +115,7 @@ This section serves as a table of contents (summary).
 
 11. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 
-   If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
+    If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
 
 12. <a href="#CreateUsers">Create User Accounts</a>, <a href="#ConfigPolicies">Configure Policies</a>, and <a href="#EditPolicies">Edit Policies</a> to populate enough users with credentials in your IdP (Identity Provider) to run load tests. 
 

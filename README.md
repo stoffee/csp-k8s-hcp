@@ -108,11 +108,10 @@ This section serves as a table of contents (summary).
    * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
    * <a href="#AccessVaultCLI">Access Vault using CLI</a>
    * <a href="#AccessVaultAPI">Access Vault API programming</a>
-   <br /><br />
 
-   <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
+   * <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
 
-   <a href="#VaultTools">Use Vault Tools</a>.
+   * <a href="#VaultTools">Use Vault Tools</a>.
 
 11. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 

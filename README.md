@@ -50,7 +50,7 @@ As is the industry custom for Terraform, a sample file is provided so you can re
 
 Here are the major components and how they interact with each other.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1678979975/instant-hcp-vault-978x418_akydv9.jpg"><img alt="instant-hcp-vault-978x418.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1678979975/instant-hcp-vault-978x418_akydv9.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1679031033/instant-hcp-vault-1782x730_wxmlpp.jpg"><img alt="instant-hcp-vault-1782x730.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1679031033/instant-hcp-vault-1782x730_wxmlpp.jpg"></a>
 
 Numbers in bubbles on the diagram mark where manual actions are performed.
 
@@ -92,11 +92,19 @@ This section serves as a table of contents (summary).
 
    The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud.
 
-7. <a href="#ConfirmHCP">Confirm HCP</a> and <a href="#ConfirmAWSGUI">Confirm resources in AWS GUI</a>.
-   
-8. <a href="#AccessVaultURL">Obtain Vault GUI URL</a> to specify variables used to install on application developer laptops a Vault client and other utilities. For example, one <strong>workflow</strong> can install and run a local Jupyter server program with Docker for use in demonstrating CLI commands exercising Vault.
+   A sample application with a UI (such as HashiCups) is used to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
 
-   Access Vault instance several ways to test connection to the 
+   Output from runs include the Vault service URL and credential token.
+
+7. Use the cloud console GUI to <a href="#ConfirmHCP">Confirm HCP</a> and <a href="#ConfirmAWSGUI">Confirm resources in AWS GUI</a>.
+
+   WARNING: Do not make changes using the cloud GUI, which creates <strong>drift</strong> from configurations defined.
+   
+8. <strong>Install</strong> on application developer laptops CLI (Command Line Interface), SSH (Secure Shell), and other utilities that include a Vault client to cache secrets. A local Jupyter server program with Docker can be installed for use in demonstrating commands exercising Vault and Consul.   
+
+9. Ensure there is adequate backup capability by testing procedures to restore from archives. This is also a good time to measure MTTR and practice Incident Management.
+
+10. <a href="#AccessVaultURL">Obtain Vault GUI URL</a> and credentials to Vault and Consul running within Kubernetes. Access Vault instance several ways to test connection to the:
    * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
    * <a href="#AccessVaultCLI">Access Vault using CLI</a>
    * <a href="#AccessVaultAPI">Access Vault API programming</a>
@@ -106,27 +114,23 @@ This section serves as a table of contents (summary).
 
    <a href="#VaultTools">Use Vault Tools</a>.
 
-   TODO: Also included is a sample application (HashiCups) to show how to replace static (unsecure long-term) passwords with dynamically created ones for use during a short window of time. We show how to arrange for PostgreSQL database to create temporary database credentials for distribution using HashiCorp's unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
-   
-9. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
+11. View logs gathered by Prometheus and analytics displayed using Grafana installed using auxilliary scripts.
 
    If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
 
-10. Ensure there is adequate backup capability by testing restore procedures.
+12. <a href="#CreateUsers">Create User Accounts</a>, <a href="#ConfigPolicies">Configure Policies</a>, and <a href="#EditPolicies">Edit Policies</a> to populate enough users with credentials in your IdP (Identity Provider) to run load tests. 
 
-11. <a href="#CreateUsers">Create User Accounts</a>, <a href="#ConfigPolicies">Configure Policies</a>, and <a href="#EditPolicies">Edit Policies</a> to populate enough users with credentials in your IdP (Identity Provider) to run load tests. 
-
-12. Create and run <strong>workflows</strong>, which include functional, performance, and capacity tests (perhaps run overnight) to emulate activity from end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
+13. Create and run (perhaps run overnight) <strong>test flows</strong> (coded in Jupyter or K6 JavaScript) to verify functional, performance, and capacity to emulate activity from end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
 
     TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault, such as <a href="#GitHubOIDC">GitHub OIDC</a> protocol.
 
     TODO: Use of a CI/CD pipeline to version every change, automated scanning of Terraform for vulnerabilities (using TFSec and other utilities), and confirmation that policies-as-code are not violated.
 
-13. Verify configuration on every change. This is important to really determine whether the whole system works both before and after <a href="#Upgrade">changing/upgrading any component</a> (Versions of Kubernetes, operating system, Vault, etc.). The Enterprise version of Terraform, Vault, and Consul provide for automation of upgrades.
+14. Verify configuration on every change. This is important to really determine whether the whole system works both before and after <a href="#Upgrade">changing/upgrading any component</a> (Versions of Kubernetes, operating system, Vault, etc.). The Enterprise version of Terraform, Vault, and Consul provide for automation of upgrades.
 
     Again, use of Infrastructure-as-Code enables quicker response to security changes identified over time, such as for EC2 IMDSv2.    
 
-14. Destroy instances of <a href="#DestroyVault">Vault</a>, Consul to having idle resources consuming money for no good reason.
+15. Destroy instances of <a href="#DestroyVault">Vault</a>, Consul to having idle resources consuming money for no good reason.
 
 <br /><br />
 

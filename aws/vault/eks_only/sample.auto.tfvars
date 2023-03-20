@@ -1,6 +1,6 @@
 deploy_eks_cluster   = true
 cluster_id           = "wilson1"
-eks_instance_types   = "t2.micro"
+eks_instance_types   = ["t2.small"]
 vpc_region           = "us-west-2"
 deploy_hvn           = true
 hvn_region           = "us-west-2"

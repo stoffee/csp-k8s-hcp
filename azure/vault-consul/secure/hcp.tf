@@ -8,11 +8,11 @@ resource "hcp_hvn" "hvn" {
 resource "hcp_azure_peering_connection" "peer" {
   hvn_link                 = hcp_hvn.hvn.self_link
   peering_id               = "dev"
-  peer_vnet_name           = azurerm_virtual_network.aks.name
+  peer_vnet_name           = azurerm_virtual_network.test.name
   peer_subscription_id     = data.azurerm_subscription.sub.subscription_id
   peer_tenant_id           = var.peer_tennant_id
   peer_resource_group_name = azurerm_resource_group.main[0].name
-  peer_vnet_region         = azurerm_virtual_network.aks.location
+  peer_vnet_region         = azurerm_virtual_network.test.location
 }
 
 data "hcp_azure_peering_connection" "peer" {
@@ -35,10 +35,10 @@ resource "azuread_service_principal" "principal" {
 
 resource "azurerm_role_definition" "definition" {
   name  = "hcp-hvn-peering-access"
-  scope = azurerm_virtual_network.aks.id
+  scope = azurerm_virtual_network.test.id
 
   assignable_scopes = [
-    azurerm_virtual_network.aks.id
+    azurerm_virtual_network.test.id
   ]
 
   permissions {
@@ -51,6 +51,6 @@ resource "azurerm_role_definition" "definition" {
 
 resource "azurerm_role_assignment" "assignment" {
   principal_id       = azuread_service_principal.principal.id
-  scope              = azurerm_virtual_network.aks.id
+  scope              = azurerm_virtual_network.test.id
   role_definition_id = azurerm_role_definition.definition.role_definition_resource_id
 }

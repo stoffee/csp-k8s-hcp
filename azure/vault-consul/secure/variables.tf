@@ -1,5 +1,4 @@
 variable "client_id" {}
-variable "prefix" {}
 
 variable "client_secret" {}
 

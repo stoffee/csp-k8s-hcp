@@ -7,19 +7,19 @@ terraform {
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = ">=2.36.0"
+      version = "2.36.0"
     }
     hcp = {
       source  = "hashicorp/hcp"
-      version = ">=0.55.0"
+      version = "0.55.0"
     }
     curl = {
       source  = "anschoewe/curl"
-      version = ">=1.0.2"
+      version = "1.0.2"
     }
     random = {
       source  = "hashicorp/random"
-      version = ">=3.3.2"
+      version = "3.3.2"
     }
   }
 }

@@ -2,7 +2,7 @@
 
 This 30-second video reveals each object and flow line in this busy diagram to summarize how all the major components interact with each other to build an enterprise environment:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Fx0XtgLUoJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Enterprise in Production using Terraform, Vault, Consul, Packer](https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg)](https://www.youtube.com/watch?v=Fx0XtgLUoJM "Enterprise in Production using Terraform, Vault, Consul, Packer")
 
 Recap:
 

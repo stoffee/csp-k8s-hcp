@@ -4,10 +4,6 @@ This 30-second video reveals each object and flow line in this busy diagram to s
 
 [![Enterprise in Production using Terraform, Vault, Consul, Packer](https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg)](https://www.youtube.com/watch?v=Fx0XtgLUoJM "Enterprise in Production using Terraform, Vault, Consul, Packer")
 
-Recap:
-
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"><img alt="instant-hcp-vault-v02-1818x750.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"></a>
-
 
 ## Multiple GitHub for Conway's Law
 
@@ -232,6 +228,10 @@ The Terraform client runs in several contexts.
 17. Upgrade? the Enterprise and Cloud editions provide for automation of upgrades.
 
 <br /><br />
+
+## Recap:
+
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"><img alt="instant-hcp-vault-v02-1818x750.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"></a>
 
 <em>The following provides more details on the manual steps summarized above.</em>
 

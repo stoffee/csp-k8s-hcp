@@ -1,31 +1,30 @@
 <a name="DataFlowDiagram"></a>
 
-This 30-second video reveals each object and flow line in this busy diagram to summarize how all the major components interact with each other to build an enterprise environment:
+## Flowchart of Enterprise in Production
+
+This busy "world map" flowchart summarizes how <strong>"anti-fragile"</strong> aspects of a secure and reliable <strong>enterprise production</strong> environments are built, quickly and securely.
 
 [![Enterprise in Production using Terraform, Vault, Consul, Packer](https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg)](https://www.youtube.com/watch?v=Fx0XtgLUoJM "Enterprise in Production using Terraform, Vault, Consul, Packer")
 
+Click the flowchart to see each object and flow line build one at a time, with commentary.
 
-## Multiple GitHub for Conway's Law
+Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong>, with links to steps for each task.
 
-> This summarizes the technologies to create an <strong>anti-fragile</strong> enterprise production environment, quickly and securely.
+## Multiples for resilience
 
-Words in green font are the attributes of what is necessary to create an <strong>anti-fragile</strong> enterprise production environment.
+> PROTIP: Resiliency often means having multiple options for each capability.
 
-Numbered bubbles on the flowchart mark the sequence of <strong>manual actions</strong>.
+Organizations, through acquisition or by design to meet customer demand for network resilience, find that they need to operate across <strong>several clouds</strong> to obtain the highest level of flexibility and resilience.
 
-Resiliency often means having multiple options for each capability.
+There are higher costs to achieve HA (High Availability) across <strong>several geographical Regions</strong> around the world, each several <strong>AZs</strong> (Availability Zones), in case one of them fails. 
 
-## Multi-cloud, Multi-region, Multi-az
+But it's done because the cost of downtime is much higher.
 
-Organizations, through acquisition or by design to meet customer demand for network resilience, find that they need to operate across several clouds to obtain the highest level of flexibility and resiliance.
-
-Within each cloud, resiliance is achieved across <strong>several geographical Regions</strong> around the world, each several <strong>AZs</strong> (Availability Zones), in case one of them fails. 
-
-## Web UI?
+## IaC, not Web UI, to handle multiples
 
 In typical enterprise production scenarios, <strong>multiple accounts</strong> are necessary to segregate permissions to dev vs. production <strong>environments</strong>, to reduce the "blast radius" when credentials for an account is stolen. 
 
-PROTIP: All the different clouds, regions, accounts, environments makes it cumbersome to switch among browser <strong>web UI</strong> (browser User Interface) alone. And manual changes are not easily repeatable due to human error. In fact, some organizations have <strong>no web UI</strong> at all, and only allow use of versioned <strong>Infrastructure as Code (IaC)</strong> as the only way to create and manage infrastructure.
+PROTIP: All the different clouds, regions, accounts, environments makes it cumbersome to manually switch among the AWS browser <strong>web UI</strong> (browser User Interface). And manual changes are not easily repeatable due to human error. In fact, many organizations discourage use of cloud vendor web UI, and only allow use of versioned <strong>Infrastructure as Code (IaC)</strong> as the only way to create and manage infrastructure.
 
 ## Terraform HCL for IaC in Registry
 
@@ -1226,3 +1225,8 @@ In AWS, these are typical Terraform modules:
    * Analytics (dashboarding) of metrics (Grafana)
    * Scaling (Kubernetes Operator <a target="_blank" href="https://karpenter.sh/">Karpenter</a> or cluster-autocaler) to provision Kubernetes nodes of the right size for
 
+## References
+
+<a target="_blank" href="https://www.hashicorp.com/resources/automating-multi-cloud-multi-region-vault-for-teams-and-landing-zones">HashiCorp Case Study: 
+Automating Multi-Cloud, Multi-Region Vault for Teams and Landing Zones</a> Feb 03, 2023
+by Bryan Krausen and Josh Poisson.

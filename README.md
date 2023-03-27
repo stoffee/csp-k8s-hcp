@@ -1,6 +1,10 @@
 <a name="DataFlowDiagram"></a>
 
-This video reveals each object and flow line in this busy diagram to summarize how all the major components interact with each other to build an enterprise environment:
+This 30-second video reveals each object and flow line in this busy diagram to summarize how all the major components interact with each other to build an enterprise environment:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Fx0XtgLUoJM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+Recap:
 
 <a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"><img alt="instant-hcp-vault-v02-1818x750.jpg"  src="https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg"></a>
 

@@ -1,3 +1,5 @@
+> Understanding this repo means you can say "I can create an entire enterprise (secure) HA Kubernetes  production environment within an hour, in AWS, Azure, Google."
+
 <a name="DataFlowDiagram"></a>
 
 ## Flowchart of Enterprise in Production
@@ -6,7 +8,7 @@ This busy "world map" flowchart summarizes how <strong>"anti-fragile"</strong> a
 
 [![Enterprise in Production using Terraform, Vault, Consul, Packer](https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg)](https://www.youtube.com/watch?v=Fx0XtgLUoJM "Enterprise in Production using Terraform, Vault, Consul, Packer")
 
-Click the flowchart to see each object and flow line build one at a time, with commentary.
+Click the flowchart to see each object and flow line build one at a time, TODO: with the commentary text below.
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong>, with links to steps for each task.
 
@@ -16,47 +18,77 @@ Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</str
 
 Organizations, through acquisition or by design to meet customer demand for network resilience, find that they need to operate across <strong>several clouds</strong> to obtain the highest level of flexibility and resilience.
 
-There are higher costs to achieve HA (High Availability) across <strong>several geographical Regions</strong> around the world, each several <strong>AZs</strong> (Availability Zones), in case one of them fails. 
+   * <a target="_blank" href="https://www.hashicorp.com/resources/q2-s-multi-cloud-win-using-infrastructure-as-code">VIDEO: Q2's multi-cloud win using infrastructure as code</a> (case study). "reduces operational complexity".
+   <br /><br />
 
-But it's done because the cost of downtime is much higher.
+## Multi-region, Multi-AZ HA
+
+It takes some effort to achieve HA (High Availability) across <strong>several geographical Regions</strong> around the world, each with several <strong>AZs</strong> (Availability Zones), in case one of them fails. 
+
+But it is done because the cost of potential downtime is much higher.
 
 ## IaC, not Web UI, to handle multiples
 
 In typical enterprise production scenarios, <strong>multiple accounts</strong> are necessary to segregate permissions to dev vs. production <strong>environments</strong>, to reduce the "blast radius" when credentials for an account is stolen. 
 
-PROTIP: All the different clouds, regions, accounts, environments makes it cumbersome to manually switch among the AWS browser <strong>web UI</strong> (browser User Interface). And manual changes are not easily repeatable due to human error. In fact, many organizations discourage use of cloud vendor web UI, and only allow use of versioned <strong>Infrastructure as Code (IaC)</strong> as the only way to create and manage infrastructure.
+PROTIP: All the different clouds, regions, accounts, environments makes it cumbersome to manually switch among them in a browser <strong>web UI</strong> (browser User Interface). And manual changes are not easily repeatable due to human error. In fact, many organizations discourage use of cloud vendor web UI, and only allow use of versioned <strong>Infrastructure as Code (IaC)</strong> as the preferred way to create and manage infrastructure. 
 
-## Terraform HCL for IaC in Registry
+When properly structured, defining infrastructure as code enables recreation of resources with less manual effort and thus with less toil and human error.
 
-HashiCorp created an open-sourced, free <strong>Terraform client</strong> program to automate the creation of resources based on definitions of versioned <strong>Infrastructure as Code</strong> in <strong>Terraform HCL</strong> (HashiCorp Configuration Language). Custom HCL are saved in version-controlled repositories within <strong>GitHub.com</strong>, GitLab, Bitbucket, or Azure DevOps. 
+## Terraform HCL for IaC in GitHub
 
-<em>NOTE: Boxes in brown are libraries that provide files that are referenced by the custom code in the blue boxes.</em>
+Custom infrastructure code is <strong>HCL</strong> (HashiCorp Configuration Language) defined in <strong>.tf files</strong> stored within a <strong>version-controlled repository</strong> (e.g. <strong>GitHub.com</strong>). 
 
-HashiCorp has worked with each cloud infrastructure vendor to create Terraform <strong>providers</strong> that HashiCorp's Terraform program uses when it turns <strong>Terraform HCL</strong> code within <strong>.tf files</strong> into API calls that create resources. 
+   * <a target="_blank" href="https://www.hashicorp.com/resources/terraform-configuration-language">https://www.hashicorp.com/resources/terraform-configuration-language</a>
+   <br /><br />
 
-References from within custom Terraform HCL code to provider logic is provided from <a target="_blank" href="https://registry.hashicorp.io">https://registry.hashicorp.io</a>.
+<em>NOTE: Boxes in brown are libraries that provide files that are referenced by custom code.</em>
+
+<a name="Task01"></a>
+1. The first manual task as a DevOps Platform Engineer is to <strong>install Terraform</strong>. 
+   
+   * <a target="_blank" href="https://learn.hashicorp.com/tutorials/terraform/install-cli">https://learn.hashicorp.com/tutorials/terraform/install-cli</a>
+   <br /><br />
+   
+We have a <strong>installer shell script</strong> which installs the Terraform client, the other utilities it needs, and the GitHub repo containing custom Terraform code.
+
+## Provider for each cloud
+
+Terraform for each cloud vendor is similar but not identical among clouds. 
+
+But Terraform client operation is the same across all clouds, which is one reason for its popularity in multi-cloud organizations.
+
+HashiCorp has worked with cloud infrastructure vendors to create Terraform <strong>providers</strong> that HashiCorp's Terraform program uses when it turns <strong>Terraform HCL</strong> code within <strong>.tf files</strong> into API calls that create resources.
+
+Provider logic is stored and retrieved from <a target="_blank" href="https://registry.hashicorp.io">https://registry.hashicorp.io</a>.
 
 
 ## Modules for cloud services
 
-Each cloud vendor offers their own <strong>cloud service</strong> for networking (VPC), compute (EC2), storage (S3), databases (RDS), etc. The logic for each cloud service is stored in a <strong>module</strong> in <a target="_blank" href="https://registry.terraform.io/browse/modules">registry.terraform.io</a>.
+Each cloud vendor offers their own <strong>cloud services</strong> for networking (VPC), compute (EC2), storage (S3), databases (RDS), etc. The logic for each cloud service is stored in a <strong>module</strong> in <a target="_blank" href="https://registry.terraform.io/browse/modules">registry.terraform.io</a>.
 
-Code <strong>templates</strong> and the <strong>resources</strong> they reference are also stored in the registry.
+Default configurations enable a full set of enterprise features without much manual effort. 
+The resources created can then be used as demos or customized for specific use cases.
 
-This public modularity enables repeatability and basic collaboration. 
+Code <strong>template</strong> files and the <strong>resources</strong> they reference are also stored in HashiCorp's registry.
+
+   * <a target="_blank" href="https://spacelift.io/blog/terraform-templates">https://spacelift.io/blog/terraform-templates</a>
+   <br /><br />
+
+PROTIP: This public modularity enables repeatability and basic collaboration. 
+
 
 ## Multi-platform
 
-Terraform for each cloud vendor is similar but not identical among clouds. But Terraform client operation is the same across all clouds, which is one reason for its popularity.
-
-Sample Terraform repos makes it easy and quick to create <strong>Highly Available (HA) services</strong> in clusters within several clouds:
+It's easier to manage the creation of complex platforms such as Kubernetes in a standardized way, so that support can be provided by a central team.
  
    * EKS (Elastic Kubernetes Service) in AWS
    * AKS (Azure Kubernetes Service)
    * GKE (Google Kubernetes Engine)
    <br /><br />
 
-Defaults in standard configuration code enable runs of a full set enterprise features without much manual editing. The resources created can then be used as demos or customized for specific use cases.
+<a name="Task02"></a>
+2. Variables in modules configuration code enable a change (such as the number of nodes) by editing files that <strong>override</strong> standard module defaults.
 
 ## Multi-node as variables
 
@@ -65,19 +97,17 @@ The overrides can occur by editing <tt>main.tf</tt>. Some HCL repositories ask e
 
 ## Helm Charts
 
-Within each cloud Kubernetes service, some prefer to define Kubernetes add-ons using <strong>Helm Charts</strong>, the default package manager for Kubernetes.
+Within each cloud Kubernetes service, <strong>Kubernetes add-ons and plug-ins</strong> are installed using <strong>Helm Charts</strong>, the default package manager for Kubernetes.
 
-There is a long list of add-ons available in the Kubernetes <a target="_blank" href="https://artifacthub.io/">https://artifacthub.io/</a>. Popular examples are open-source Prometheus to gather logs and statistics into its database, and Grafana to visualize what was collected.
-There are often several add-ons for common functionality, such as <strong>cert-manager</strong> to automate the creation of TLS certificates for HTTPS, and <strong>external-dns</strong> to automate the creation of DNS records for services.
+Popular add-ons from the <a target="_blank" href="https://artifacthub.io/">https://artifacthub.io/</a> include the open-source Prometheus to gather logs and statistics into its database, and Grafana to visualize metrics in a custom <strong>dashboard</strong>. Common add-ons add functionality such as <strong>cert-manager</strong> to automate the creation of TLS certificates for HTTPS, and <strong>external-dns</strong> to automate the creation of DNS records for services.
 
+Using infrastructure-as-code makes it practical to test different components together to ensure that a particular combination of versions all work together well.
 
 ## Multi-OS (operating system)
 
-Kubernetes was designed to operate on several operating systems. Linux is the most popular choice. But it can also run on Windows and macOS. The specific operating system used is set when the <strong>container</strong> is built (using Packer), and stored for access within <strong>Artifactory</strong> or other container registry. 
+Kubernetes does not require a specific operating system. The specific operating system used is set when the <strong>container</strong> is built (using Packer), and stored for access within <strong>Artifactory</strong> or other container registry. 
 
-The Terraform client is written in Go, so can be run on Windows, macOS, or Linux without additional install (such as needed with Java, Python, C, etc.).
-
-The number of replicas can be changed by overriding default values to variables in modules controlling what features and services you would like to deploy. 
+The Terraform client is written in Go, so can be run on Linux, macOS, or Windows without additional install (such as needed with Java, Python, C, etc.).
 
 ## Multi-replicas
 
@@ -119,6 +149,7 @@ The Terraform client runs in several contexts.
 
 <strong>DevOps/Platform Engineers</strong> can run the Terraform client on their laptops.
 
+<a name="Task03"></a>
 3. They install the Terraform client and pre-requisite utilities by <a href="#Install">running a shell script</a> (on a macOS laptop).
 
    On a macOS, the script installs <strong>Homebrew</strong> and other package managers for easier upgrade. If pre-requisites for brew isn't installed, the script would install them.
@@ -128,6 +159,7 @@ The Terraform client runs in several contexts.
    BTW the most popular editor is Microsoft's Visual Studio Code (VSCode) which is free and open source.
 
 
+   <a name="Task04"></a>
    ### Continuous Integration & Testing
 
 4. Most enterprises now run a series of <strong>tasks after each change</strong>.
@@ -147,6 +179,7 @@ The Terraform client runs in several contexts.
    
    Some users of open-source Terraform configure a <strong>backend.tf</strong> file to specify a remote location, such as a <strong>S3</strong> bucket or DynamoDB.   
 
+   <a name="Task05"></a>
    ### TFC (Terraform Cloud)
 
 5. Even more useful is HashiCorp's <strong>TFC (Terraform Cloud)</strong>, which provides features in addition to a place to store versioned state files. It's free but extra features can be licensed.
@@ -165,9 +198,15 @@ The Terraform client runs in several contexts.
 
    The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud.
 
+   <a name="Task06"></a>
+
 6. HCP can run Terraform restricted on each workspace.
 
+   <a name="Task07"></a>
+
 7. Define automated workflow tasks such as HashiCorp Sentinel to enforce policies and processing such as <strong>Synk</strong> to scan containers. 
+
+   <a name="Task08"></a>
 
 8. To use Vault HCP, create a HCP account to obtain a HCP Organization name. You then <a href="#SetHCPEnv">Setup HCP environment variables</a> to connect to TFC. 
 
@@ -177,14 +216,19 @@ The Terraform client runs in several contexts.
 
    Custom HCL is loaded onto HCP from github.com.
 
-
    Output from runs include the Vault service URL and credential token.
 
-9.  Use the cloud console GUI to <a href="#ConfirmHCP">Confirm HCP</a> and <a href="#ConfirmAWSGUI">Confirm resources in AWS GUI</a>.
+   <a name="Task09"></a>
 
-   WARNING: Do not make changes using the cloud GUI, which creates <strong>drift</strong> from configurations defined.
+9.  Use the cloud console GUI to <a href="#ConfirmHCP">Confirm HCP</a> and <a href="#ConfirmAWSGUI">confirm resources in AWS GUI</a>.
+
+    WARNING: Avoid making changes using the cloud GUI, which creates <strong>drift</strong> from configurations defined. Keep Terraform as the <strong>single source of truth</strong> to define cloud resources. 
+
+    The Enterprise/Cloud edition of Terraform performs <strong>drift detection</strong> to detect changes made outside of Terraform. But it's less risk and toil to avoid drift in the first place.
    
-   Install on application <strong>developer's</strong> laptops CLI (Command Line Interface), SSH (Secure Shell), and other utilities that include a Vault client to cache secrets. A local Jupyter server program with Docker can be installed for use in demonstrating commands exercising Vault and Consul.   
+    Install on application <strong>developer's</strong> laptops CLI (Command Line Interface), SSH (Secure Shell), and other utilities that include a Vault client to cache secrets. A local Jupyter server program with Docker can be installed for use in demonstrating commands exercising Vault and Consul.   
+
+    <a name="Task10"></a>
 
 10. <a href="#AccessVaultCLI">CLI commands can obtain from within Kubernetes the <a href="#AccessVaultURL">URL and credentials to Vault</a> and Consul.
 
@@ -202,27 +246,41 @@ The Terraform client runs in several contexts.
 
     Consul can be used to <strong>discover</strong> services running in Kubernetes.
 
+    <a name="Task11"></a>
+
 11. Ensure there is adequate backup capability by testing procedures to restore from archives. This is also a good time to measure MTTR and practice Incident Management.
 
     PROTIP: When resources can be recreated quickly, there is less fear of destroying <a href="#DestroyVault">Vault</a> and other resources, resulting in less idle resources consuming money for no good reason. 
+
+    <a name="Task12"></a>
 
 12. To provide visibility to the <strong>security posture</strong> of your system, filter logs gathered and view structure analytics displayed using Grafana installed using auxilliary scripts.
 
     If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
 
+    <a name="Task13"></a>
+
 13. Populate enough fake/test users with credentials obtained from your IdP (Identity Provider) <a href="#CreateUsers">Creating User Accounts</a>, <a href="#ConfigPolicies">Configuring Policies</a>, and <a href="#EditPolicies">Editng Policies</a>. This is done by coding API in app programs.
 
     PROTIP: Identify users and teams in production and invite/load them in the system (via IdP) early during the implementation project for less friction before users can begin work with minimal effort.
+
+    <a name="Task14"></a>
 
 14. Create and run (perhaps run overnight) <strong>test flows</strong> (coded in Jupyter or K6 JavaScript) to verify functional, performance, and capacity to emulate activity from end-user clients. This enables monitoring over time of latency between server and end-users, which can impair user productivity.
 
     TODO: GitHub Actions workflows are included here to have a working example of how to retrieve secrets from Vault, such as <a href="#GitHubOIDC">GitHub OIDC</a> protocol.
 
+    <a name="Task15"></a>
+
 15. Verify configuration on every change. This is important to really determine whether the whole system works both before and after <a href="#Upgrade">changing/upgrading any component</a> (Versions of Kubernetes, operating system, Vault, etc.). The Enterprise version of Terraform, Vault, and Consul provide for automation of upgrades.
 
     Again, use of Infrastructure-as-Code enables quicker response to security changes identified over time, such as for EC2 IMDSv2.    
 
+    <a name="Task16"></a>
+
 16. Migrate?
+
+    <a name="Task17"></a>
 
 17. Upgrade? the Enterprise and Cloud editions provide for automation of upgrades.
 

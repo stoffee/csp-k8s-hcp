@@ -6,9 +6,9 @@
 
 This busy "world map" flowchart summarizes how <strong>"anti-fragile"</strong> aspects of a secure and reliable <strong>enterprise production</strong> environments are built, quickly and securely.
 
-[![Enterprise in Production using Terraform, Vault, Consul, Packer](https://res.cloudinary.com/dcajqrroq/image/upload/v1679893044/instant-hcp-vault-v02-1818x750_nyjd8o.jpg)](https://www.youtube.com/watch?v=Fx0XtgLUoJM "Enterprise in Production using Terraform, Vault, Consul, Packer")
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1680090730/instant-hcp-1825x754_fjclso.jpg"><img alt="instant-hcp-1825x754.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1680090730/instant-hcp-1825x754_fjclso.jpg"></a>
 
-Click the flowchart to see each object and flow line build one at a time, TODO: with the commentary text below.
+Click the flowchart <a target="_blank" href="https://www.youtube.com/watch?v=Fx0XtgLUoJM">video</a> to see each object and flow line build one at a time, TODO: with the commentary text below.
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong>, with links to steps for each task.
 

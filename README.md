@@ -210,9 +210,9 @@ The Terraform client runs in several contexts.
 
 8. To use Vault HCP, create a HCP account to obtain a HCP Organization name. You then <a href="#SetHCPEnv">Setup HCP environment variables</a> to connect to TFC. 
 
-   HCP creates and uses a HVN to access cloud infrastructure.
+   HCP creates and uses a HVN to access cloud infrastructure. The HashiCorp Virtual Network (HVN) makes HashiCorp Cloud Platform (HCP) networking possible. An HVN delegates an IPv4 CIDR range that HCP uses to automatically create resources in your cloud network -- one that does not overlap with other public cloud networks (e.g. AWS VPCs) or on-premise networks.
 
-   Each team is provided a separate <strong>Workspaces</strong> to segregate work among different teams. 
+   Each team is provided a separate <strong>Workspace</strong> to segregate work among different teams. 
 
    Custom HCL is loaded onto HCP from github.com.
 

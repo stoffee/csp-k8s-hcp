@@ -6,7 +6,7 @@
 
 This busy "world map" flowchart summarizes how <strong>"anti-fragile"</strong> aspects of a secure and reliable <strong>enterprise production</strong> environments are built, quickly and securely.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1680090730/instant-hcp-1825x754_fjclso.jpg"><img alt="instant-hcp-1825x754.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1680090730/instant-hcp-1825x754_fjclso.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221328/instant-1820x752_q6kkj6.jpg"><img alt="instant-1820x752.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221328/instant-1820x752_q6kkj6.jpg"></a>
 
 Click the flowchart <a target="_blank" href="https://www.youtube.com/watch?v=Fx0XtgLUoJM">video</a> to see each object and flow line build one at a time, TODO: with the commentary text below.
 
@@ -37,30 +37,28 @@ When properly structured, defining infrastructure as code enables recreation of 
 
 ## Terraform HCL for IaC in GitHub
 
-Custom infrastructure code is <strong>HCL</strong> (HashiCorp Configuration Language) defined in <strong>.tf files</strong> stored within a <strong>version-controlled repository</strong> (e.g. <strong>GitHub.com</strong>). 
+Custom infrastructure code is <strong>HCL</strong> (HashiCorp Configuration Language) defined in <strong>.tf files</strong> pull from a <strong>version-controlled repository (e.g. GitHub.com</strong>). 
+
+<em>NOTE: Boxes in brown are libraries that provide files that are referenced by custom code.</em>
 
    * <a target="_blank" href="https://www.hashicorp.com/resources/terraform-configuration-language">https://www.hashicorp.com/resources/terraform-configuration-language</a>
    <br /><br />
 
-<em>NOTE: Boxes in brown are libraries that provide files that are referenced by custom code.</em>
-
 <a name="Task01"></a>
-1. The first manual task as a DevOps Platform Engineer is to <strong>install Terraform</strong>. 
+1. The first manual task of a <strong>DevOps</strong> Platform Engineer is to install the <strong>Terraform client program</strong>. We have a <strong>installer shell script</strong> which installs the Terraform client, the other utilities it needs, and the GitHub repo containing custom Terraform code.
    
    * <a target="_blank" href="https://learn.hashicorp.com/tutorials/terraform/install-cli">https://learn.hashicorp.com/tutorials/terraform/install-cli</a>
    <br /><br />
-   
-We have a <strong>installer shell script</strong> which installs the Terraform client, the other utilities it needs, and the GitHub repo containing custom Terraform code.
 
 ## Provider for each cloud
 
-Terraform for each cloud vendor is similar but not identical among clouds. 
+Terraform client operations (plan, apply, destroy, etc.) is the same across all clouds, which is one reason for its popularity in multi-cloud organizations.
 
-But Terraform client operation is the same across all clouds, which is one reason for its popularity in multi-cloud organizations.
+But the Terraform HCL code for each cloud vendor is similar but not identical among clouds. 
 
-HashiCorp has worked with cloud infrastructure vendors to create Terraform <strong>providers</strong> that HashiCorp's Terraform program uses when it turns <strong>Terraform HCL</strong> code within <strong>.tf files</strong> into API calls that create resources.
+HashiCorp has worked with cloud infrastructure vendors to create Terraform <strong>providers</strong> that HashiCorp's Terraform program uses when it turns <strong>Terraform HCL</strong> code within <strong>.tf files</strong> into <strong>API</strong> calls that create resources.
 
-Provider logic is stored and retrieved from <a target="_blank" href="https://registry.hashicorp.io">https://registry.hashicorp.io</a>.
+Provider logic is stored in and retrieved from <a target="_blank" href="https://registry.hashicorp.io">https://registry.hashicorp.io</a>.
 
 
 ## Modules for cloud services
@@ -88,6 +86,8 @@ It's easier to manage the creation of complex platforms such as Kubernetes in a 
    <br /><br />
 
 <a name="Task02"></a>
+
+
 2. Variables in modules configuration code enable a change (such as the number of nodes) by editing files that <strong>override</strong> standard module defaults.
 
 ## Multi-node as variables
@@ -173,7 +173,7 @@ The Terraform client runs in several contexts.
 
    ### Local tfstate files
 
-   <tt>terraform plan</tt> and <tt>terraform apply</tt> commands are used on a stand-alone laptop to create cloud resources.
+   <tt>terraform plan</tt> and <tt>terraform apply</tt> commands are used on a stand-alone laptop to create cloud resources. 
 
    When Terraform client runs locally, it creates for itself a <strong>local tfstate file</strong> to remember what it created.
    
@@ -196,7 +196,9 @@ The Terraform client runs in several contexts.
    
    The web UI standardizes permissions and workflows across teams.
 
-   The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud.
+   The automation can optionally include automatic generation of diagrams from HCL or resource created in the cloud. 
+
+   A utility to generate for SPDX format JSON from NTIA-compliant SBOM 
 
    <a name="Task06"></a>
 

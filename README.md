@@ -6,7 +6,7 @@
 
 This busy "world map" flowchart summarizes how <strong>"anti-fragile"</strong> aspects of a secure and reliable <strong>enterprise production</strong> environments are built, quickly and securely.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221328/instant-1820x752_q6kkj6.jpg"><img alt="instant-1820x752.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221328/instant-1820x752_q6kkj6.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221691/instant-1818x753_dtf85f.jpg"><img alt="instant-1818x753.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1680221691/instant-1818x753_dtf85f.jpg"></a>
 
 Click the flowchart <a target="_blank" href="https://www.youtube.com/watch?v=Fx0XtgLUoJM">video</a> to see each object and flow line build one at a time, TODO: with the commentary text below.
 
@@ -136,9 +136,9 @@ In many enterprises, a <strong>corporate-wide central</strong> <a target="_blank
 
 ## Corporate IdP and Vault
 
-Due to the principle of "segregation of duties", large organizations have a separate team manage the corporate IdP (Identity Provider) system to authenticate users to access the corporate network and applications. Such systems provide MFA (MultiFactor Authentication) mechanisms to make users prove control of their data.
+Due to the principle of "segregation of duties", large organizations have a separate team manage the corporate <strong>IdP</strong> (Identity Provider) system (such as <strong>Okta</strong>) to authenticate users to access the corporate network and applications. Such systems provide MFA (MultiFactor Authentication) mechanisms to make users prove their identity.
 
-A corporate Vault system is often used to store and manage the credentials for the IdP system. This is a common pattern for eliminating static long-term credentials that can be stolen.
+A central <strong>corporate Vault</strong> system is often used to store and manage the credentials for the IdP system. This is a common pattern for eliminating static long-term credentials that can be stolen.
 
    When the person initiating runs authenticates with Okta, their script would be able to establish cloud credentials needed to authenticate runs.
 

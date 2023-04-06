@@ -1,17 +1,3 @@
-variable "access_key" {
-}
-
-variable "secret_key" {
-  sensitive = true
-}
-
-variable "region" {
-  default = "us-west-2"
-}
-
-variable "aws_session_token" {
-  sensitive = true
-}
 variable "deploy_eks_cluster" {
   type        = string
   description = "Choose if you want an eks cluster to be provisioned"
@@ -95,4 +81,15 @@ variable "vault_tier" {
   type        = string
   description = "The HCP Vault tier to use when creating a Vault cluster"
   default     = "development"
+}
+
+variable "vault_namespace" {
+  default = "awscreds"
+}
+variable "aws_secret_engine_access_key" {
+  description = "AWS Secret Engine Access Key"
+}
+variable "aws_secret_engine_secret_key" {
+  description = "AWS Secret Engine secret Key"
+  sensitive   = true
 }

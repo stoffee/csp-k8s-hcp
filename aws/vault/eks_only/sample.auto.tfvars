@@ -1,9 +1,0 @@
-deploy_eks_cluster   = true
-cluster_id           = "wilson1"
-eks_instance_types   = ["t2.small"]
-vpc_region           = "us-west-2"
-deploy_hvn           = true
-hvn_region           = "us-west-2"
-hvn_id               = "wilson1"
-deploy_vault_cluster = true
-hcp_vault_cluster_id = "wilson1"

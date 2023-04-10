@@ -8,10 +8,10 @@ module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.3"
   # insert the 3 required variables here
-  vault_addr                   = data.tfe_outputs.part1.vault_public_url
+  vault_addr                   = data.terraform_remote_state.part1.outputs.vault_public_url
   #vault_addr                   = var.vault_addr
   namespace                    = var.vault_namespace
-  vault_token                  = data.tfe_outputs.part1.vault_root_token
+  vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token
   #vault_token                  = var.vault_token
   create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"

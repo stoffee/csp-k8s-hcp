@@ -1,7 +1,7 @@
 module "hcp-eks" {
   source  = "stoffee/vault-eks/hcp"
   version = "~> 0.0.13"
-  #source               = "../../../../terraform-hcp-vault-eks/"
+  #source               = "/Users/stoffee/git/terraform-module-development/terraform-hcp-vault-eks"
   cluster_id           = var.cluster_id
   deploy_hvn           = var.deploy_hvn
   hvn_id               = var.hvn_id
@@ -15,26 +15,26 @@ module "hcp-eks" {
   eks_cluster_version = "1.25"
 }
 
-
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
-  version = "~> 0.11.1"
+  version = "~> 0.11.2"
   # insert the 3 required variables here
-  vault_addr                          = module.hcp-eks.vault_external_address
-  namespace                           = var.vault_namespace
-  vault_token                         = module.hcp-eks.vault_public_url
-  create_vault_admin_policy           = true
-  vault_admin_policy_name             = "supah-user"
-  userpass_auth_enabled               = false
-  approle_auth_enabled                = false
-  aws_secret_enabled                  = true
-  aws_secret_engine_access_key        = aws_iam_access_key.dyndns.id
-  aws_secret_engine_secret_key        = aws_iam_access_key.dyndns.encrypted_secret
+  vault_addr                   = module.hcp-eks.vault_public_url
+  namespace                    = var.vault_namespace
+  vault_token                  = module.hcp-eks.vault_root_token
+  create_vault_admin_policy    = true
+  vault_admin_policy_name      = "supah-user"
+  userpass_auth_enabled        = false
+  approle_auth_enabled         = false
+  aws_secret_enabled           = true
+  aws_secret_engine_access_key = aws_iam_access_key.dyndns.id
+  aws_secret_engine_secret_key = aws_iam_access_key.dyndns.encrypted_secret
+  depends_on = [module.hcp-eks]
 }
 
 resource "aws_iam_access_key" "dyndns" {
-  user    = aws_iam_user.dyndns.name
-#  pgp_key = "keybase:some_person_that_exists"
+  user = aws_iam_user.dyndns.name
+  #  pgp_key = "keybase:some_person_that_exists"
 }
 
 resource "aws_iam_user" "dyndns" {
@@ -57,10 +57,10 @@ resource "aws_iam_user_policy" "dyndns" {
 }
 
 resource "vault_policy" "dyndns" {
-  namespace  = var.vault_namespace
+  namespace = var.vault_namespace
   depends_on = [module.vault-namespace]
-  name       = "dyndns"
-  policy     = <<EOT
+  name   = "dyndns"
+  policy = <<EOT
 path "aws/creds/dyndns" {
   capabilities = [ "create", "update", "delete", "list", "read" ]
 }

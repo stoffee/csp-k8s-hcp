@@ -86,10 +86,3 @@ variable "vault_tier" {
 variable "vault_namespace" {
   default = "awscreds"
 }
-variable "aws_secret_engine_access_key" {
-  description = "AWS Secret Engine Access Key"
-}
-variable "aws_secret_engine_secret_key" {
-  description = "AWS Secret Engine secret Key"
-  sensitive   = true
-}

@@ -8,7 +8,7 @@ module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.3"
   # insert the 3 required variables here
-  vault_addr                   = data.terraform_remote_state.part1.outputs.vault_public_url
+  vault_addr                   = module.hcp-eks.vault_public_url
   #vault_addr                   = var.vault_addr
   namespace                    = var.vault_namespace
   vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token

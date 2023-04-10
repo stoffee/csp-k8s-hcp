@@ -1,4 +1,5 @@
 remote_backend.tf
+!aws/vault/eks_only_with_aws_secrets_engine/part2/remote_backend.tf
 apiVersion
 #k8s
 kubeconfig*

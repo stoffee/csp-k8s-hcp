@@ -1,3 +1,8 @@
+provider "vault" {
+  address = var.vault_addr
+  token   = var.vault_token
+}
+
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.3"

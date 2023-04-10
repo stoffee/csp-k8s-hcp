@@ -25,4 +25,5 @@ variable "vault_addr" {
 variable "vault_token" {
   description = "Token to be used when configuring Vault"
   sensitive   = true
+  default = "bob"
 }

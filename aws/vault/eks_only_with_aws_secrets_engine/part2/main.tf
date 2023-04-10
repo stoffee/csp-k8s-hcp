@@ -1,10 +1,18 @@
+data "tfe_outputs" "foo" {
+  organization = "cdunlap"
+  workspace = "terraform-hcp-vault-eks-aws-creds-part1"
+}
+
+
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.4"
   # insert the 3 required variables here
-  vault_addr                   = var.vault_addr
+  vault_addr                   = data.tfe_outputs.foo.outputs.vault_public_url
+  #vault_addr                   = var.vault_addr
   namespace                    = var.vault_namespace
-  vault_token                  = var.vault_token
+  vault_token                  = data.tfe_outputs.foo.outputs.vault_root_token
+  #vault_token                  = var.vault_token
   create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"
   userpass_auth_enabled        = false

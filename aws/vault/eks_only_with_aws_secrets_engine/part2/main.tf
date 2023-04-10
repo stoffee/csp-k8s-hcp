@@ -6,7 +6,7 @@ data "tfe_outputs" "foo" {
 
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
-  version = "~> 0.11.4"
+  version = "~> 0.11.3"
   # insert the 3 required variables here
   vault_addr                   = data.tfe_outputs.foo.outputs.vault_public_url
   #vault_addr                   = var.vault_addr

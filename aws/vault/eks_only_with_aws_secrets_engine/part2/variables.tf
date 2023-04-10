@@ -18,11 +18,11 @@ variable "region" {
   default = "us-west-2"
 }
 
-/*
 variable "vault_addr" {
   description = "Address of vault server to set at VAULT_ADDR"
   type        = string
 }
+/*
 variable "vault_token" {
   description = "Token to be used when configuring Vault"
   sensitive   = true

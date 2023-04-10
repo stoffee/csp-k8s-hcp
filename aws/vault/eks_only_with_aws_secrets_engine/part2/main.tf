@@ -1,9 +1,3 @@
-data "tfe_outputs" "part1" {
-  organization = "cdunlap"
-  workspace = "terraform-hcp-vault-eks-aws-creds-part1"
-}
-
-
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.3"

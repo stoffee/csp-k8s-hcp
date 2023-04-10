@@ -14,6 +14,9 @@ variable "vault_tier" {
 variable "vault_namespace" {
   default = "awscreds"
 }
+variable "region" {
+  default = "us-west-2"
+}
 
 /*
 variable "vault_addr" {

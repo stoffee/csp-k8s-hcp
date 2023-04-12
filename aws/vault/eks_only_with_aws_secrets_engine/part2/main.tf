@@ -12,7 +12,7 @@ module "vault-namespace" {
   namespace                    = var.vault_namespace
   #vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token
   vault_token                  = var.vault_token
-  create_vault_admin_policy    = true
+  create_vault_admin_policy    = false
   vault_admin_policy_name      = "supah-user"
   userpass_auth_enabled        = false
   approle_auth_enabled         = false
@@ -34,7 +34,7 @@ resource "aws_iam_user" "dyndns" {
 data "aws_iam_policy_document" "dyndns" {
   statement {
     effect    = "Allow"
-    actions   = ["ec2:Describe*"]
+    actions   = ["ec2:*"]
     resources = ["*"]
   }
 }

@@ -68,8 +68,17 @@ path "sys/health"
 EOT
 }
 
+resource "vault_token_auth_backend_role" "admin" {
+  role_name              = "supah-user"
+  allowed_policies       = ["supah-user"]
+  orphan                 = true
+  token_period           = "86400"
+  renewable              = true
+  token_explicit_max_ttl = "115200"
+}
+
 resource "vault_token" "admin" {
-  #role_name = "app"
+  role_name = "supah-user"
 
   policies = ["supah-user"]
 

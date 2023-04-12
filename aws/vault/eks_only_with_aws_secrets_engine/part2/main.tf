@@ -101,8 +101,8 @@ module "vault-namespace" {
   vault_addr = var.vault_addr
   namespace  = var.vault_namespace
   #vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token
-  vault_token = var.vault_token
-  #vault_token                  = vault_token.admin.client_token
+  #vault_token = var.vault_token
+  vault_token                  = vault_token.admin.client_token
   create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"
   userpass_auth_enabled        = false

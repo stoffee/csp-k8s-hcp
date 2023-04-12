@@ -70,7 +70,7 @@ EOT
 
 resource "vault_token_auth_backend_role" "admin" {
   role_name              = "supah-user"
-  allowed_policies       = ["supah-user"]
+  allowed_policies       = ["supah-user", "hcp-root", "default" ]
   orphan                 = true
   token_period           = "86400"
   renewable              = true
@@ -80,7 +80,7 @@ resource "vault_token_auth_backend_role" "admin" {
 resource "vault_token" "admin" {
   role_name = "supah-user"
 
-  policies = ["supah-user"]
+  policies = ["supah-user", "hcp-root", "default"]
 
   renewable = true
   ttl       = "24h"

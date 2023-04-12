@@ -12,9 +12,13 @@ module "vault-namespace" {
   namespace                    = var.vault_namespace
   #vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token
   vault_token                  = var.vault_token
-  create_vault_admin_policy    = false
+  create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"
-  userpass_auth_enabled        = false
+  userpass_auth_enabled        = true
+  userpass_admin = "higest_priv_user"
+  userpass_admin_password = var.userpass_admin_password
+  userpass_user1 = "stoffee"
+  userpass_user1_password = var.userpass_user1_password
   approle_auth_enabled         = false
   aws_secret_enabled           = true
   aws_secret_engine_access_key = aws_iam_access_key.dyndns.id

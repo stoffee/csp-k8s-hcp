@@ -83,7 +83,7 @@ resource "vault_token" "admin" {
   policies = ["supah-user"]
 
   renewable = true
-  ttl = "24h"
+  ttl       = "24h"
 
   renew_min_lease = 43200
   renew_increment = 86400
@@ -98,10 +98,10 @@ module "vault-namespace" {
   version = "~> 0.11.3"
   # insert the 3 required variables here
   #vault_addr                   = data.terraform_remote_state.part1.outputs.vault_public_url
-  vault_addr                   = var.vault_addr
-  namespace                    = var.vault_namespace
+  vault_addr = var.vault_addr
+  namespace  = var.vault_namespace
   #vault_token                  = data.terraform_remote_state.part1.outputs.vault_root_token
-  vault_token                  = var.vault_token
+  vault_token = var.vault_token
   #vault_token                  = vault_token.admin.client_token
   create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"
@@ -137,10 +137,10 @@ resource "aws_iam_user_policy" "dyndns" {
 }
 
 resource "vault_policy" "dyndns" {
-  namespace = var.vault_namespace
+  namespace  = var.vault_namespace
   depends_on = [module.vault-namespace]
-  name   = "dyndns"
-  policy = <<EOT
+  name       = "dyndns"
+  policy     = <<EOT
 path "aws/creds/dyndns" {
   capabilities = [ "create", "update", "delete", "list", "read" ]
 }

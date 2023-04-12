@@ -96,11 +96,7 @@ module "vault-namespace" {
   #vault_token                  = vault_token.admin.client_token
   create_vault_admin_policy    = true
   vault_admin_policy_name      = "supah-user"
-  userpass_auth_enabled        = true
-  userpass_admin = "higest_priv_user"
-  userpass_admin_password = var.userpass_admin_password
-  userpass_user1 = "stoffee"
-  userpass_user1_password = var.userpass_user1_password
+  userpass_auth_enabled        = false
   approle_auth_enabled         = false
   aws_secret_enabled           = true
   aws_secret_engine_access_key = aws_iam_access_key.dyndns.id

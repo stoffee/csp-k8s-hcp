@@ -27,13 +27,3 @@ variable "vault_token" {
   sensitive   = true
   default = "bob"
 }
-
-variable "userpass_admin_password" {
-  description = "Password for the admin user"
-  sensitive   = true
-}
-
-variable "userpass_user1_password" {
-  description = "Password for the user1 user"
-  sensitive   = true
-}

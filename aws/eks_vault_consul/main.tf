@@ -1,3 +1,7 @@
+provider "aws" {
+  region   = var.vpc_region
+}
+
 module "hcp-eks" {
   source  = "stoffee/vault-eks/hcp"
   version = "~> 0.0.13"

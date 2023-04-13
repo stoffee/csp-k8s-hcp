@@ -2,6 +2,11 @@ provider "vault" {
   address = var.vault_addr
   token   = var.vault_token
 }
+
+resource "vault_namespace" "new" {
+  path = var.namespace
+}
+
 resource "vault_policy" "admin_policy" {
   namespace = "admin"
   name      = "supah-user"
@@ -83,7 +88,7 @@ resource "vault_token" "admin" {
   policies = ["supah-user", "hcp-root", "default"]
 
   renewable = true
-  ttl       = "24h"
+  ttl       = "7m"
 
   renew_min_lease = 43200
   renew_increment = 86400
@@ -93,6 +98,36 @@ resource "vault_token" "admin" {
   }
 }
 
+#AWs Secrets Engine
+resource "vault_aws_secret_backend" "aws" {
+  access_key = aws_iam_access_key.dyndns.id
+  secret_key = aws_iam_access_key.dyndns.encrypted_secret
+  namespace  = vault_namespace.new.path
+  depends_on = [
+    vault_namespace.new,
+  ]
+}
+
+resource "vault_aws_secret_backend_role" "aws-iam-creds" {
+  backend         = vault_aws_secret_backend.aws.path
+  name            = "aws-iam-creds"
+  credential_type = "iam_user"
+  namespace       = vault_namespace.new.path
+
+  policy_document = <<EOT
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "iam:*",
+      "Resource": "*"
+    }
+  ]
+}
+EOT
+}
+/*
 module "vault-namespace" {
   source  = "stoffee/vault-namespace/hashicorp"
   version = "~> 0.11.3"
@@ -111,6 +146,7 @@ module "vault-namespace" {
   aws_secret_engine_access_key = aws_iam_access_key.dyndns.id
   aws_secret_engine_secret_key = aws_iam_access_key.dyndns.encrypted_secret
 }
+*/
 
 resource "aws_iam_access_key" "dyndns" {
   user = aws_iam_user.dyndns.name

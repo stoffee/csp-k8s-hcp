@@ -1,0 +1,12 @@
+deploy_eks_cluster   = true
+cluster_id           = "eks-test"
+eks_instance_types   = ["t2.small"]
+vpc_region           = "us-west-2"
+deploy_hvn           = true
+hvn_region           = "us-west-2"
+hvn_id               = "wilson1"
+deploy_vault_cluster = true
+hcp_vault_cluster_id = "vault-test"
+access_key           = "ASIAYFE7O2PNAQKA5XXC"
+secret_key           = "sa8iKb6kaEdHaBdb2PQV16qfwgCa5FglJPzDi+vX"
+aws_session_token        = "IQoJb3JpZ2luX2VjEF0aCXVzLXdlc3QtMiJIMEYCIQDOKoSxsF3+cKyU/MtSt1vXT0cXLwVh7BLt5s5Iqh9z8QIhAI4JXxapwLWIVG069/FxuwfytB97ghFeLQFytTE21F2BKt4ECDYQABoMNTYwODI3NjUxMDM0IgwQBS/xOHR8EoymSfsquwTQYEd+vhYOh4JZpwJSdahvsMFfObcozuxF65QxRRBn0YsPZnIPbOqjLqk8fKYua61ZVdh1n1iCtyfSISmdGaidMm0cy7YzX10KNZYMo0ESvv75UaHZEeBXNqKP5Uk4aX82FdZfvd8z/+RzMcZRFMjak471PPV+Qlokqri+ypMtcgMp1GKU7jm6PggLCa0VHL22QV9lVFKzMcO7aSb4SFuJZWtXQh2TIdrypynGYbEQAnWgWrSrc3SnyEBSyYUOS0xQ95muHKJNJ3XIVqpwb4DNqkwopIoGT0+DYcdPjlTYzMmuRFKu4kVx0q7iaTAQ9NsN4Vjr0MEpLKuj4CQ0wyTqwgBdgk7xILA3iwFTUnkhzhsGhOC88GkkyoA6lgNhyGLMi8x4incez2ooqRugSChXFWoeNE5Xd8MD4rFCQ9twj8fS+jGzkFBts1nb2YcsZT7QrCHqrMEZ/qltMi7VFIPdcscbrQ1tGZXQC7yP/rB5TY+Xiw6we9AxSpeZllSQdBVJKZEQWmx+smoaFODkLddN4TP7p/ILFvcM+VqHVd8AqBh6RHvcit4XJSLcKHLH0IQaKeIipbgn+r8OgR0GwgK52QVpUKB8OKFvJnKCmOS3A1naWiEzJsdW4MadP2G3MxFN5689zT9QQJ+o5t29liT0HD1iJnrzicl6Cp7FEKjvsHqHuUpt6Vl32m35yCq9Rjo0d4+WsB9ELZKSkZsteF6zPu19JH/4i/UuuOqzmp7RA64nAc4uyiAlhFliMJ76h6EGOqABAA7Lw2m6LFVFZM8/HF+CsnLUAJWzWvclxYPP6Nt+NbYCveyWeGSY1R2Fg9RFP84deEVHKn+pcD75UAFjgfrpN/fSDVk0aIx/289iQcUJvUM0fvacfFivvExMy5WDtDZHo3/LpCnlvl3JbyRBgV+7B+aTh5OpDeP8mVN7K1avT+3uLO+Wuf76CAqVCGdiX5deKi8amZW3qowf7HXA7wh6FQ=="

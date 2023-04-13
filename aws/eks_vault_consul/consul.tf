@@ -56,7 +56,7 @@ module "eks_consul_client" {
   consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
   consul_version   = hcp_consul_cluster.main.consul_version
   datacenter       = hcp_consul_cluster.main.datacenter
-  k8s_api_endpoint = module.hcp-eks[0].cluster_endpoint
+  k8s_api_endpoint = module.hcp-eks.cluster_endpoint
 
   # The EKS node group will fail to create if the clients are
   # created at the same time. This forces the client to wait until

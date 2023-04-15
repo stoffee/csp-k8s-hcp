@@ -6,7 +6,7 @@
 
 This <a href="#Flowchart">busy "world map" flowchart</a> introduces how a secure and reliable, yet full-featured <strong>enterprise</strong> production environments are built, quickly and securely.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681598223/instant-flow-2058x880_pupgzi.jpg"><img alt="instant-flow-2058x880.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681598223/instant-flow-2058x880_pupgzi.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"><img alt="instant-flow-2056x866.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong> described in the text below.
 
@@ -182,13 +182,17 @@ Updates to Helm charts can be set to trigger <strong>redeployment</strong> of Ku
 
 ## 5. TFC (Terraform Cloud)
 
-Even more useful is HashiCorp's <strong>TFC (Terraform Cloud)</strong> where HashiCorp provides a safe place to store versioned state files. It's free but extra features can be licensed.
-
-   * <a href="#SetTFCEnv">Setup TFC</a> environment variables to connect to TFC.
-
-   * <a href="#WhyHCP">Why use Terraform Cloud?</a>
+Even more useful is HashiCorp's <a href="#WhyHCP">TFC (Terraform Cloud)</a> where HashiCorp provides a safe place to store versioned state files. It's free but extra features can be licensed.
 
 Like other SaaS (Software as a Service), TFC frees you from managing the underlying multi-region/multi-AZ HA infrastructure, and provides hosting of Terraform state and lock files.
+
+To <a href="#SetTFCEnv">Setup TFC</a>:
+
+   1. Create workspaces
+   2. Connect to a Git repo
+   3. Define environment variables
+   4. Kick-off a plan from the drop-down menu
+   <br /><br >
 
 
 <a name="Task06"></a>
@@ -217,13 +221,18 @@ Other <strong>tasks in TFC workflows</strong> include automatic generation of di
 
 ## 8. HCP (HashiCorp Cloud Platform)
 
-To use Vault HCP, create a HCP account to obtain a HCP Organization name. You then <a href="#SetHCPEnv">Setup HCP environment variables</a> to connect to TFC. 
+HashiCorp also created a SaaS HashiCorp Cloud Platform (HCP) for <strong>Vault and Consul</strong> that's similar to TFC. 
 
-   HCP creates and uses a <strong>HVN (HashiCorp Virtual Network)</strong> to access cloud infrastructure that makes networking possible. An HVN delegates an IPv4 CIDR range that HCP uses to automatically create resources in your cloud network -- one that does not overlap with other public cloud networks (e.g. AWS VPCs) or on-premise networks.
+To use it, first create a HCP account to obtain a HCP Organization name. 
+Then <a href="#SetHCPEnv">Setup HCP environment variables</a> to connect to TFC. 
 
-   Custom HCL is loaded onto HCP from github.com.
+Tasks and Workflow in HCP are similar to TFC.
 
-   Output from runs include the Vault service URL and credential token.
+HCP creates and uses a <strong>HVN (HashiCorp Virtual Network)</strong> to access cloud infrastructure that makes networking possible. An HVN delegates an IPv4 CIDR range that HCP uses to automatically create resources in your cloud network -- one that does not overlap with other public cloud networks (e.g. AWS VPCs) or on-premise networks.
+
+Custom HCL is loaded onto HCP from github.com.
+
+Output from runs include the Vault service URL and credential token.
 
 <a name="Task09"></a>
 
@@ -320,7 +329,7 @@ The Enterprise and Cloud editions provide for automation of upgrades.
 
 ## Recap: Flowchart #
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681598223/instant-flow-2058x880_pupgzi.jpg"><img alt="instant-flow-2058x880.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681598223/instant-flow-2058x880_pupgzi.jpg"></a>
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"><img alt="instant-flow-2056x866.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
 
 
 <em>The following provides more details on the manual steps summarized above.</em>

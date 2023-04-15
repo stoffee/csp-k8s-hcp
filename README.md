@@ -35,8 +35,8 @@ Many enterprises now make use of a central corporate <strong>IdP</strong> (Ident
 
 Due to the principle of "segregation of duties", large organizations have separate teams to manage the corporate IdP system, another team manage the cloud infrastructure, and yet another team to manage a central <strong>corporate Vault</strong> system used to create temporary time-limited credentials instead of static long-term credentials which can be stolen.
 
-    * <a target="_blank" href="https://www.hashicorp.com/resources/okta-terraform-vault">https://www.hashicorp.com/resources/okta-terraform-vault</a>
-    <br /><br />
+   * <a target="_blank" href="https://www.hashicorp.com/resources/okta-terraform-vault">https://www.hashicorp.com/resources/okta-terraform-vault</a>
+   <br /><br />
 
 The corporate Vault system coordinates with IdP systems using <a href="#GitHubOIDC">OIDC</a> (OpenID Foundation's Connect) and other protocols.
 
@@ -245,17 +245,18 @@ Install on application <strong>developer's</strong> laptops CLI (Command Line In
 
 <a href="#ConfigSecretsEngines">Configure Secrets Engines</a> such that Vault can <strong>cache secrets</strong>  so applications can access secrets without wearing out the Vault server.
     
-    * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
-    * <a href="#AccessVaultCLI">Access Vault using CLI</a>
-    * <a href="#AccessVaultAPI">Access Vault API programming</a>
+   * <a href="#VaultMenu">View the Vault Admin menu</a> UI. 
+   * <a href="#AccessVaultCLI">Access Vault using CLI</a>
+   * <a href="#AccessVaultAPI">Access Vault API programming</a>
 
-    * <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
+   * <a href="#ConfigSecretsEngines">Configure Secrets Engines</a>.
 
-    * <a href="#VaultTools">Use Vault Tools</a>.
+   * <a href="#VaultTools">Use Vault Tools</a>.
 
-    Commands can be run to obtain Application URLs and database URLs.
+Commands can be run to obtain Application URLs and database URLs.
 
-    Consul can be used to <strong>discover</strong> services running in Kubernetes.
+Consul can be used to <strong>discover</strong> services running in Kubernetes.
+
 
 <a name="Task11"></a>
 
@@ -263,7 +264,7 @@ Install on application <strong>developer's</strong> laptops CLI (Command Line In
 
 Ensure there is adequate backup capability by testing procedures to restore from archives. This is also a good time to measure MTTR and practice Incident Management.
 
-    PROTIP: When resources can be recreated quickly, there is less fear of destroying <a href="#DestroyVault">Vault</a> and other resources, resulting in less idle resources consuming money for no good reason. 
+PROTIP: When resources can be recreated quickly, there is less fear of destroying <a href="#DestroyVault">Vault</a> and other resources, resulting in less idle resources consuming money for no good reason. 
 
 <a name="Task12"></a>
 
@@ -271,7 +272,8 @@ Ensure there is adequate backup capability by testing procedures to restore from
 
 To provide visibility to the <strong>security posture</strong> of your system, filter logs gathered and view structure analytics displayed using Grafana installed using auxilliary scripts.
 
-    If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
+If a SIEM (such as Splunk or Datadog) is available, view alerts generated from logs sent to them.
+
 
 <a name="Task13"></a>
 

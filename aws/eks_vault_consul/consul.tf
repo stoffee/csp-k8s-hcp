@@ -30,6 +30,7 @@ resource "hcp_consul_cluster_root_token" "token" {
   cluster_id = hcp_consul_cluster.main.id
 }
 
+/*
 module "eks_consul_client" {
   source  = "hashicorp/hcp-consul/aws//modules/hcp-eks-client"
   version = "~> 0.12.1"
@@ -37,8 +38,8 @@ module "eks_consul_client" {
   boostrap_acl_token = hcp_consul_cluster_root_token.token.secret_id
   cluster_id         = hcp_consul_cluster.main.cluster_id
   # strip out url scheme from the public url
-  #consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
-  consul_hosts     = hcp_consul_cluster.main.consul_public_endpoint_url
+  consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
+  #consul_hosts     = hcp_consul_cluster.main.consul_public_endpoint_url
   consul_version   = hcp_consul_cluster.main.consul_version
   datacenter       = hcp_consul_cluster.main.datacenter
   k8s_api_endpoint = module.hcp-eks.eks_cluster_endpoint
@@ -48,3 +49,4 @@ module "eks_consul_client" {
   # the node group is successfully created.
   depends_on = [module.hcp-eks]
 }
+*/

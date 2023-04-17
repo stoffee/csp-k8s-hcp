@@ -1,62 +1,63 @@
-> Understanding this repo means you can say "I can create an entire enterprise (secure) HA Kubernetes  production environment within an hour, in AWS, Azure, Google."
+<a name="FlowVideo"></a>
 
-<a name="DataFlowDiagram"></a>
+## Video Flowchart
 
-## Flowchart of Enterprise in Production
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YTefnPaoWi8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-This <a href="#Flowchart">busy "world map" flowchart</a> introduces how a secure and reliable, yet full-featured <strong>enterprise</strong> production environments are built, quickly and securely.
+<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg">This video</a> <a href="#Flowchart">flowchart</a> introduces all the components of an entire enterprise production environment containing high-availability Kubernetes clusters (with add-ins) created using secure-by-default Terraform code.
 
-<a target="_blank" href="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"><img alt="instant-flow-2056x866.jpg" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
+To reach this <a href="#Flowchart">busy "world map" flowchart</a>, we'll cover one concept at a time, from the beginning.
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong> described in the text below.
+
+Green text identifies attributes about <strong>enterprise</strong> usage.
+
 
 <a name="Task01"></a>
 
 ## 1. Web UI Credentials
 
-A <strong>web UI</strong> (browser web User Interface) is provided by each Cloud Service Provider (CSP) for cloud administrators to create and manage infrastructure in their cloud. Each cloud service provider have a different way to create and manage <strong>credentials</strong> to access each of their cloud environments.
+A <strong>web UI</strong> (browser web User Interface) is provided by each Cloud Service Provider (CSP) for cloud administrators to create and manage infrastructure in their cloud. Each cloud service provider has a different way to create and manage <strong>credentials</strong> to access each of their cloud environments.
 
 ### Multi-cloud
 
-Green text identifies attributes about use of Terraform.
+> PROTIP: Resiliency often means having multiple options for achieving each capability.
 
-> PROTIP: Resiliency often means having multiple options for each capability.
-
-TODO: Recent surveys reveal that 75% of large enterprises, through acquisition or by design to meet customer demand for network resilience, find that they need to operate across <a target="_blank" href="https://www.hashicorp.com/resources/why-multi-cloud">multiple clouds</a>.
+TODO: Recent surveys reveal the large percentage of enterprises -- through acquisition or by design to meet customer demand for network resilience -- find that they need to operate across <a target="_blank" href="https://www.hashicorp.com/resources/why-multi-cloud">multiple clouds</a>.
 
    * Case studies (such as <a target="_blank" href="https://www.hashicorp.com/resources/q2-s-multi-cloud-win-using-infrastructure-as-code">VIDEO: Q2</a>) find that multi-cloud "reduces operational complexity" while achieving more flexibility and resilience.
    <br /><br />
 
 ### Corporate IdP (Okta)
 
-Many enterprises now make use of a central corporate <strong>IdP</strong> (Identity Provider) systems such as Azure and <a target="_blank" href="https://www.okta.com/">Okta</a> to authenticate human users accessing corporate-owned networks and applications. Such systems provide MFA (MultiFactor Authentication) mechanisms to make users prove the still are in control of their email, mobile phone, or other authentication device.
+Also, many enterprises now make use of a central corporate <strong>IdP</strong> (Identity Provider) system such as Azure AD or <a target="_blank" href="https://www.okta.com/">Okta</a> to authenticate human users accessing corporate-owned networks and applications. Such systems provide MFA (MultiFactor Authentication) mechanisms to make users prove they still are in control of their email, mobile phone, or other authentication device.
 
 ### Corporate Vault
 
-Due to the principle of "segregation of duties", large organizations have separate teams to manage the corporate IdP system, another team manage the cloud infrastructure, and yet another team to manage a central <strong>corporate Vault</strong> system used to create temporary time-limited credentials instead of static long-term credentials which can be stolen.
+Due to the security principle of "segregation of duties", many organizations now have separate teams: one to manage the corporate IdP system, an SRE team to manage the cloud infrastructure, and yet another team to manage a central <strong>corporate Vault</strong> system used to create temporary time-limited credentials instead of static long-term credentials which can be stolen.
 
    * <a target="_blank" href="https://www.hashicorp.com/resources/okta-terraform-vault">https://www.hashicorp.com/resources/okta-terraform-vault</a>
    <br /><br />
 
-The corporate Vault system coordinates with IdP systems using <a href="#GitHubOIDC">OIDC</a> (OpenID Foundation's Connect) and other protocols.
+A corporate Vault system usually coordinates with IdP systems using <a href="#GitHubOIDC">OIDC</a> (OpenID Foundation's Connect) and other protocols.
 
 ### Multi-region, Multi-AZ HA
 
 Each cloud provider provides its own mechanisms to achieve HA (High Availability) across <strong>multiple geographical Regions</strong> around the world, each housing <strong>multiple AZs</strong> (Availability Zones), in case one of them fails. 
 
-This is used because the cost of potential downtime is much higher.
+PROTIP: This is done because the cost of potential downtime is much higher.
 
 ### Web UI limitations to handle multiples
 
-In typical enterprise production scenarios, <strong>multiple accounts</strong> are necessary to segregate permissions to dev vs. production <strong>environments</strong>, to reduce the "blast radius" when credentials for an account is stolen. 
+In typical enterprise production scenarios, <strong>multiple accounts</strong> are necessary to segregate permissions to dev vs. production <strong>environments</strong>, to reduce the "blast radius" in case credentials for an account are stolen. 
 
 PROTIP: All the different clouds, regions, accounts, environments makes it cumbersome to manually switch among them in a browser <strong>web UI</strong> (browser User Interface). And manual changes are not easily repeatable due to human error. 
 
 ### Infrastructure as Code (IaC)
 
-In fact, many organizations discourage use of cloud vendor web UI, and only allow use of versioned  <a target="_blank" href="https://www.hashicorp.com/resources/infrastructure-as-code">Infrastructure as Code (IaC)</a>  stored in <strong>Version Control Systems</strong> such as GitHub as the preferred way to create and manage IT infrastructure.
+In fact, many organizations discourage use of cloud vendor web UI, and only allow use of versioned <a target="_blank" href="https://www.hashicorp.com/resources/infrastructure-as-code">Infrastructure as Code (IaC)</a> stored in <strong>Version Control Systems</strong> such as GitHub as the preferred way to create and manage IT infrastructure.
 
-<em>NOTE: Boxes in brown are libraries that provide files referenced by custom code.</em>
+<em>NOTE: In this presentation, boxes in brown are libraries that provide files referenced by custom code.</em>
 
 When properly structured, defining infrastructure as code enables easier and more reliable re-creation of resources with less manual effort and thus with less toil and human error.
 
@@ -64,24 +65,24 @@ When properly structured, defining infrastructure as code enables easier and mor
 
 Infrastructure as Code leverages <strong>APIs</strong> (Application Programming Interfaces) that each cloud vendor has defined so external programs can create and manage its infrastructure instead of people using a WebUI.
 
-The most common custom infrastructure code is <a target="_blank" href="https://www.hashicorp.com/resources/terraform-configuration-language">HCL (HashiCorp Configuration Language)</a> defined in <strong>.tf files</strong>.
+The most common custom infrastructure as code language is <a target="_blank" href="https://www.hashicorp.com/resources/terraform-configuration-language">HCL (HashiCorp Configuration Language)</a> (Terraform code) defined in <strong>.tf files</strong>.
 
 
 <a name="Task02"></a>
 
 ## 2. Terraform binary & Registry
 
-To process HCL code, <a target="_blank" href="https://learn.hashicorp.com/tutorials/terraform/install-cli">download and install</a> a single <strong>Terraform binary</strong> executable program which turns <strong>CLI</strong> (Command Line Interface) commands into API calls that create and manage infrastructure resources.
+To process HCL code, <a target="_blank" href="https://learn.hashicorp.com/tutorials/terraform/install-cli">download and install</a> a <strong>Terraform binary</strong> executable program which turns <strong>CLI</strong> (Command Line Interface) commands into API calls which create and manage infrastructure resources.
 
 That program can be installed on <strong>DevOps</strong> Platform Engineers' <strong>individual laptops</strong> by running an <strong>installer shell script</strong> which also installs all other utilities needed from <strong>Homebrew</strong> or other install package managers. 
 
-The Terraform binary is written in Go, so can be run on Linux, macOS, or Windows without additional install (such as needed with Java, Python, C, etc.).
+BTW: The Terraform binary is written in Go, so can be run on Linux, macOS, or Windows without additional installs (such as needed with Java, Python, C, etc.).
 
-The install scriipt can also <strong>clone</strong> onto the laptop GitHub repos containing custom Terraform code.
+The install script can also <strong>clone</strong> onto the laptop GitHub repos containing custom Terraform code.
 
 ### Provider for each cloud
 
-HashiCorp has worked with cloud infrastructure vendors to create Terraform <a target="_blank" href="https://www.terraform.io/docs/providers/index.html">providers</a> that HashiCorp's Terraform binary uses when it verifies credentials and turns <strong>Terraform HCL</strong> code within <strong>.tf files</strong> into API calls that <strong>create resources</strong>.
+HashiCorp works with cloud vendors to create Terraform <a target="_blank" href="https://www.terraform.io/docs/providers/index.html">providers</a> that HashiCorp's Terraform binary uses when it verifies credentials and turns <strong>Terraform HCL</strong> into API calls that <strong>create resources</strong>.
 
 Provider logic is stored in and retrieved from <a target="_blank" href="https://registry.hashicorp.io">https://registry.hashicorp.io</a>.
 
@@ -92,24 +93,26 @@ Provider logic is stored in and retrieved from <a target="_blank" href="https://
 
 Each cloud vendor offers their own networking, compute, storage, and other <strong>cloud services</strong>. The logic for handling each cloud service is stored in a <strong>module</strong> in <a target="_blank" href="https://registry.terraform.io/browse/modules">registry.terraform.io</a>.
 
-Code <a target="_blank" href="https://spacelift.io/blog/terraform-templates">template</a> files and the <strong>resources</strong> they reference are also stored in HashiCorp's registry.
+Optionally, code <a target="_blank" href="https://spacelift.io/blog/terraform-templates">template</a> files and the <strong>resources</strong> they reference are also stored in HashiCorp's registry.
+
+PROTIP: This modularity enables repeatability and collaboration. 
+
+Those with Terraform Enterprise licenses can create <strong>private</strong> modules in the Registry.
 
 ### Multi-platform
 
-Different modules reduce the complexity during creation of complex platforms such as Kubernetes:
+Different modules reduce the complexity during creation of  <strong>platforms</strong> such as Kubernetes:
  
    * <a target="_blank" href="https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest">EKS (Elastic Kubernetes Service) in AWS</a>
    * AKS (Azure Kubernetes Service)
    * GKE (Google Kubernetes Engine)
    <br /><br />
 
-PROTIP: This public modularity enables repeatability and basic collaboration. 
+When managed by a central team, modules provide a standardized way to create and manage infrastructure resources across platforms and cloud vendors.
 
-Those with Terraform Enterprise licenses can create <strong>private</strong> modules in the Registry.
+PROTIP: API calls among cloud vendors can be very different. However, Terraform providers and Terraform binary commands standardizes operation across all clouds
 
-When managed by a central team, modules provide a standardized way to create and manage infrastructure resources across <strong>multiple platforms</strong> for Kubernetes by cloud vendors.
-
-Each HCL module contains variables with default values that can be <strong>overridden</strong> by customized values in <strong>main.tf</strong> or <strong>sample.auto.tfvars</strong> files, thus controlling what features and services you would like to deploy for your specific use case example.
+Each HCL module contains variables with default values that can be <strong>overridden</strong> by customized values in <strong>main.tf</strong> or <strong>sample.auto.tfvars</strong> files, thus controlling what features and services you would like to deploy for your specific use case.
 
 ### Multi-node
 
@@ -119,7 +122,9 @@ For example, the number of nodes within a Kubernetes <strong>multi-node</strong>
 
 Within each cloud Kubernetes service, <strong>Kubernetes add-ons</strong> and plug-ins are installed using <strong>Helm</strong> charts, the default package manager for Kubernetes. 
 
-Popular add-ons from the <a target="_blank" href="https://artifacthub.io/">https://artifacthub.io/</a> include the open-source Prometheus to gather logs and statistics into its database, and Grafana to visualize metrics in a custom <strong>dashboard</strong>. Common add-ons add functionality such as "cert-manager" automate the creation of TLS certificates for HTTPS; "external-dns" automates the creation of DNS records for services; etc.
+Popular add-ons from the <a target="_blank" href="https://artifacthub.io/">https://artifacthub.io/</a> include the open-source <strong>Prometheus</strong> to gather logs and statistics into its database, and <strong>Grafana</strong> to visualize metrics in a custom <strong>dashboard</strong>. 
+
+Common add-ons add functionality such as "external-dns" to automate the creation of DNS records for services.
 
 PROTIP: Using infrastructure-as-code makes it more practical to test different components together to ensure that a particular combination of versions all work together well.
 
@@ -129,11 +134,11 @@ The specific operating system used within Kubernetes are set when  <strong>conta
 
 ### Multi-replicas
 
-HashiCorp designed its application services <strong>Vault</strong> and <strong>Consul</strong> with modern mechanisms to be not just highly available (HA) within a <strong>cluster</strong> of Kubernetes nodes. HashiCorp's app can be configured for large capacity by use of <strong>multiple replicas</strong> which can span several regions around the world to serve high loads.
+HashiCorp designed its <strong>Vault</strong> and <strong>Consul</strong> utilities with modern mechanisms to be highly available (HA) within a <strong>cluster</strong> of Kubernetes nodes. HashiCorp's apps can also be configured for large capacity by use of <strong>multiple replicas</strong> which can span several regions around the world to serve high loads.
 
 ### Vault services
 
-<strong>UI apps</strong> (such as the sample Hashicups or counting service) can be deployed with a <strong>database</strong> within Kubernetes or outside of Kubernetes. Either way, the app can reference a <strong>Vault service</strong> to obtain from the database a new <strong>dynamic (temporary) user credential</strong> for each new connection. This is a common pattern for eliminating static long-term credentials that can be stolen.
+<strong>UI apps</strong> (such as the sample Hashicups or counting service) can be deployed with a <strong>database</strong> within Kubernetes or outside of Kubernetes. Either way, the app can reference a <strong>Vault service</strong> to obtain from the database a new <strong>dynamic (temporary) user credential</strong> for each new connection. This is a common pattern for how Vault can eliminate static long-term credentials that can be stolen.
 
 PROTIP: To distribute secrets between services, Vault can use its unique "AppRole" authentication method from a Vault one-time access Cubbyhole.
 
@@ -144,34 +149,35 @@ HashiCorp Consul can ensure that communications be encrypted during transit usin
 
 ### External utilities
 
-Also due to organizational divisions and to limit "cognitive load" on individuals,
-these common utility systems are usually established by separate groups using separate repositories:
+Also due to organizational divisions and to limit "cognitive load" on individuals, common utility systems are usually established by separate groups using separate repositories:
 
    * An <strong>Archival</strong> solution to backup and restore data
   
-   * A <strong>SIEM</strong> (Security Information and Event Management) solution such as Splunk, LogRhythm, <a target="_blank" href="https://www.datadoghq.com/dg/security/siem-solution/">Datadog</a>, <a target="_blank" href="https://www.comparitech.com/net-admin/siem-tools/">etc.</a> which retrieves, ingests, aggregates, and correlates variouos <strong>logs</strong> from various services into analytic dashboards
+   * A <strong>SIEM</strong> (Security Information and Event Management) solution such as Splunk, <a target="_blank" href="https://www.datadoghq.com/dg/security/siem-solution/">Datadog</a>, <a target="_blank" href="https://www.comparitech.com/net-admin/siem-tools/">etc.</a> which retrieves, ingests, aggregates, and correlates variouos <strong>logs</strong> from various services into analytic dashboards
 
-   * An <strong>Alerting</strong> solution which evaluates data within SIEM to issue alerts, with escalations when alerts are not acknowledged in a timely manner.
+   * An <strong>Alerting</strong> solution which evaluates data within SIEM to issue alerts and escalations when alerts are not acknowledged in a timely manner.
 
-In many enterprises, a <strong>corporate-wide central</strong> <a target="_blank" href="https://www.checkpoint.com/cyber-hub/threat-prevention/what-is-soc/">SOC (Security Operations Center)</a> uses their SIEM 24/7/365 to monitor, triage, and respond to cyber threats.
+In many enterprises, a <strong>corporate-wide central</strong> <a target="_blank" href="https://www.checkpoint.com/cyber-hub/threat-prevention/what-is-soc/">SOC (Security Operations Center)</a> review alerts to monitor, triage, and respond to anomalies and  threats.
+
+Identity Providers can also provide alerts about repetitive failures in Single-Sign-On (SSO) identity verification.
 
 
 <a name="Task04"></a>
 
 ## 4. Terraform run triggers
 
-Terraform processing can be invoked under several contexts:
+### Vulnerability scanning
 
-When a Terraform HCL file is <strong>saved</strong> after <strong>each change</strong>, it can be set to trigger run of additional utilities such as <a href="#ScanTF">tfsec, Trivey, Checkov, Snyk, etc. to scan HCL files</a> for vulnerabilities.
+When a Terraform HCL file is <strong>saved</strong> using Git, after <strong>each change</strong>, it can be set to trigger run of additional utilities such as <a href="#ScanTF">tfsec, Trivy, Checkov, Snyk, etc. to scan HCL files</a> for vulnerabilities.
 
 PROTIP: When created, resources in the cloud can be hacked immediately. So such utilities enable vulnerabilities to be identified and remediated in cloud resources even <strong>before they are created</strong>.
-
-PROTIP: API calls among cloud vendors can be very different. However, Terraform providers and Terraform binary commands standardizes operation across all clouds:
 
 
 ### Local tfstate files
 
-When the <a href="#DeployTF"><tt>terraform apply</tt> command creates cloud resources,  runs locally, it creates for itself a <strong>local tfstate file</strong> to remember what it created.
+When the <a href="#DeployTF"><tt>terraform apply</tt> command runs locally to create cloud resources, it creates for itself a <strong>local tfstate file</strong> to remember what it created.
+
+The enterprise edition of Terraform uses state files to identify "drift" created by manual changes. and <strong>manage</strong> resources, and to <strong>prevent</strong> Terraform from creating resources that already exist.
 
 Some users of open-source Terraform configure a <strong>backend.tf</strong> file to specify a remote location, such as a <strong>S3</strong> bucket or DynamoDB.   
 

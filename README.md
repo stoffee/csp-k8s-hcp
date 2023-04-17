@@ -2,9 +2,9 @@
 
 ## Video Flowchart
 
-Click image below to <a target="_blank" href="https://www.youtube.com/embed/Fx0XtgLUoJM">watch a gradual reveal video</a>, covered in text below, one concept at a time.
+Click image below to <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8">watch a gradual reveal video</a>, covered in text below, one concept at a time.
 
-<a target="_blank" href="https://youtu.be/Fx0XtgLUoJM"><img alt="instant-flow-2056x866_jwsear" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
+<a target="_blank" href="https://youtu.be/YTefnPaoWi8"><img alt="instant-flow-2056x866_jwsear" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
 
 Click image above to <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8">watch a gradual reveal video</a>, covered in text below, one concept at a time.
 

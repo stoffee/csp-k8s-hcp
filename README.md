@@ -3,8 +3,10 @@
 ## Video Flowchart
 
 <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8"><img alt="instant-flow-2056x866_jwsear" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
-Click to <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8">watch a gradual reveal video</a> of the above 
-<a href="#Flowchart">busy "world map" flowchart</a>. which we cover here, one concept at a time, from the beginning.
+Click image above to <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8">watch a gradual reveal video</a> of the above 
+<a href="#Flowchart">busy flowchart</a>. which we cover below here, one concept at a time.
+
+The <a href="#Flowchart">flowchart</a> introduces all the components of an entire enterprise production environment containing high-availability Kubernetes clusters (with add-ins) created using secure-by-default Terraform code.
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong> described in the text below.
 

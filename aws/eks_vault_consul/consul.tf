@@ -31,7 +31,7 @@ resource "hcp_consul_cluster_root_token" "token" {
 }
 
 resource "helm_release" "consul" {
-  depends_on = [kubernetes_namespace.secrets]
+  #depends_on = [kubernetes_namespace.secrets]
   name       = "${var.release_name}-consul"
   repository = "https://helm.releases.hashicorp.com"
   chart      = "consul"

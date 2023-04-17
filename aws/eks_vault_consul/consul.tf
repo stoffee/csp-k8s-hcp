@@ -23,7 +23,7 @@ resource "hcp_consul_cluster" "main" {
 #  hvn_id             = hcp_hvn.main.hvn_id
   public_endpoint    = true
   tier               = var.consul_tier
-  min_consul_version = "v1.14.0"
+  min_consul_version = "v1.15.2"
 }
 
 resource "hcp_consul_cluster_root_token" "token" {
@@ -38,6 +38,7 @@ module "eks_consul_client" {
   cluster_id         = hcp_consul_cluster.main.cluster_id
   # strip out url scheme from the public url
   consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
+  consul_hosts     = hcp_consul_cluster.main.consul_public_endpoint_url
   consul_version   = hcp_consul_cluster.main.consul_version
   datacenter       = hcp_consul_cluster.main.datacenter
   k8s_api_endpoint = module.hcp-eks.eks_cluster_endpoint

@@ -37,7 +37,7 @@ module "eks_consul_client" {
   boostrap_acl_token = hcp_consul_cluster_root_token.token.secret_id
   cluster_id         = hcp_consul_cluster.main.cluster_id
   # strip out url scheme from the public url
-  consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
+  #consul_hosts     = tolist([substr(hcp_consul_cluster.main.consul_public_endpoint_url, 8, -1)])
   consul_hosts     = hcp_consul_cluster.main.consul_public_endpoint_url
   consul_version   = hcp_consul_cluster.main.consul_version
   datacenter       = hcp_consul_cluster.main.datacenter

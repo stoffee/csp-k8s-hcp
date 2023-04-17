@@ -53,6 +53,7 @@ resource "helm_release" "consul" {
   }
 }
 
+/*
 resource "kubernetes_namespace" "secrets" {
   metadata {
     annotations = {
@@ -66,6 +67,7 @@ resource "kubernetes_namespace" "secrets" {
     name = var.namespace
   }
 }
+*/
 
 /*
 module "eks_consul_client" {

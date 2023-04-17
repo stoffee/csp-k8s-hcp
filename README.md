@@ -6,9 +6,9 @@ Click image below to <a target="_blank" href="https://www.youtube.com/embed/YTef
 
 <a target="_blank" href="https://youtu.be/YTefnPaoWi8"><img alt="instant-flow-2056x866_jwsear" src="https://res.cloudinary.com/dcajqrroq/image/upload/v1681600613/instant-flow-2056x866_jwsear.jpg"></a>
 
-Click image above to <a target="_blank" href="https://www.youtube.com/embed/YTefnPaoWi8">watch a gradual reveal video</a>, covered in text below, one concept at a time.
+Yes, there is a lot involved in this <a href="#Flowchart">flowchart</a>, which introduces ALL the key components of an entire enterprise production environment containing high-availability Kubernetes clusters (with add-ins) that interface with external systems.
 
-The <a href="#Flowchart">flowchart</a> introduces all the components of an entire enterprise production environment containing high-availability Kubernetes clusters (with add-ins) created using secure-by-default Terraform code.
+> But the focus here is on <strong>automation</strong> so you don't need to manually code every detail about every resource.
 
 Numbered bubbles on the flowchart mark the sequence of <strong>manual tasks</strong> described in the text below.
 

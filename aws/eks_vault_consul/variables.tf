@@ -91,13 +91,13 @@ variable "consul_tier" {
 
 variable "release_name" {
   type        = string
-  default     = "hashicorp-learn"
+  default     = "hashicorp-consul"
   description = "Helm Release name for Consul chart"
 }
 
 variable "namespace" {
   type        = string
-  default     = "hashicorp-learn"
+  default     = "hashicorp-consul"
   description = "Namespace to deploy the Consul Helm chart"
 }
 

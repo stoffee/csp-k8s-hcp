@@ -30,6 +30,43 @@ resource "hcp_consul_cluster_root_token" "token" {
   cluster_id = hcp_consul_cluster.main.id
 }
 
+resource "helm_release" "consul" {
+  depends_on = [kubernetes_namespace.secrets]
+  name       = "${var.release_name}-consul"
+  repository = "https://helm.releases.hashicorp.com"
+  chart      = "consul"
+  namespace  = var.namespace
+
+  set {
+    name  = "global.name"
+    value = "consul"
+  }
+
+  set {
+    name  = "server.replicas"
+    value = var.replicas
+  }
+
+  set {
+    name  = "server.bootstrapExpect"
+    value = var.replicas
+  }
+}
+
+resource "kubernetes_namespace" "secrets" {
+  metadata {
+    annotations = {
+      name = var.namespace
+    }
+
+    labels = {
+      purpose = "consul"
+    }
+
+    name = var.namespace
+  }
+}
+
 /*
 module "eks_consul_client" {
   source  = "hashicorp/hcp-consul/aws//modules/hcp-eks-client"

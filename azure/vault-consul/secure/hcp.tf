@@ -26,7 +26,8 @@ resource "hcp_hvn_route" "route" {
   hvn_link         = hcp_hvn.hvn.self_link
   hvn_route_id     = "azure-route"
   destination_cidr = "172.31.0.0/16"
-  target_link      = data.hcp_azure_peering_connection.peer.self_link
+  #target_link      = data.hcp_azure_peering_connection.peer.self_link
+  target_link      = resource.hcp_azure_peering_connection.peer.self_link
 }
 
 resource "azuread_service_principal" "principal" {

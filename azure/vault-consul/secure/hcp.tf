@@ -24,7 +24,7 @@ data "hcp_azure_peering_connection" "peer" {
 // The route depends on the data source, rather than the resource, to ensure the peering is in an Active state.
 resource "hcp_hvn_route" "route" {
   hvn_link         = hcp_hvn.hvn.self_link
-  hvn_route_id     = "azure-route"
+  hvn_route_id     = "${random_id.prefix.hex}-route"
   destination_cidr = "172.31.0.0/16"
   #target_link      = data.hcp_azure_peering_connection.peer.self_link
   target_link      = resource.hcp_azure_peering_connection.peer.self_link
